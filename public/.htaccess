@@ -1,0 +1,29 @@
+ErrorDocument 403 /error.php?code=403
+ErrorDocument 404 /error.php?code=404
+ErrorDocument 500 /error.php?code=500
+
+DirectoryIndex index.html index.php /error.php?code=403
+AddHandler application/x-httpd-ea-php82 .php
+
+# php_flag register_globals off
+# php_value default_charset utf-8
+# php_value date.timezone UTC
+# php_value max_execution_time 180
+# php_value memory_limit 1024M
+# php_value post_max_size 200M
+# php_value upload_max_filesize 100M
+
+RewriteEngine on
+RewriteBase /
+
+# RewriteCond %{HTTPS} !^on$
+# RewriteCond %{HTTP_HOST} !^127\.0\.2\.5$ [NC]
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+# RewriteCond %{HTTP_HOST} !^framework\.eeq$ [NC]
+# RewriteCond %{HTTP_HOST} !^127\.0\.2\.5$ [NC]
+# RewriteRule ^(.*)$ https://framework.eeq/$1 [R=301,L]
+# RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?framework\.eeq/ [NC]
+# RewriteCond %{HTTP_REFERER} !^http(s)?://127\.0\.2\.5/ [NC]
+# RewriteRule \.(jpeg|jpg|gif|png|bmp)$ - [NC,F,L]
+
+RewriteRule ^((pl)/)?$ /index.php?action=main_page&lang=$2 [L]
