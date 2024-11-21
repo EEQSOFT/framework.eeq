@@ -4,4 +4,4 @@
 
 Copyright (c) 2024 EEQSOFT
 
-https://framework.eeqsoft.com
+https://phpframework.eeqsoft.com
