@@ -18,7 +18,7 @@ class UserRepository extends Repository
             SET u.`user_ip_loged` = ':ip', u.`user_date_loged` = ':date'
             WHERE u.`user_id` = :user"
         )
-            ->setParameter('user', $user])
+            ->setParameter('user', $user)
             ->setParameter('ip', $ip)
             ->setParameter('date', $date)
             ->getStrQuery();

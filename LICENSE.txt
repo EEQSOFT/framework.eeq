@@ -1,4 +1,4 @@
-This application is licensed under a MIT License
+This framework is licensed under a MIT License
 
 The MIT license is a permissive software license. Basically
 you can do whatever you want as long as you include the original
