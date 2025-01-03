@@ -13,6 +13,7 @@ ini_set('upload_max_filesize', '100M');
 const CONFIG_FILE = __DIR__ . '/config.php';
 const DATABASE_FILE = __DIR__ . '/database.php';
 const SETTINGS_FILE = __DIR__ . '/settings.php';
+const CORE_FILE = __DIR__ . '/../inc/core/core.php';
 const AUTOLOAD_FILE = __DIR__ . '/../src/autoload.php';
 
 $lang = $_GET['lang'] ?? 'en';
