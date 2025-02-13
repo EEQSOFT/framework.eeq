@@ -4,12 +4,43 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use App\Core\{Database, Manager};
+use App\Core\{
+    Cache,
+    Config,
+    Data,
+    Database,
+    Email,
+    Html,
+    Key,
+    Manager,
+    Token
+};
 
 abstract class Controller
 {
+    protected Config $config;
+    protected Cache $cache;
+    protected Data $data;
+    protected Key $key;
+    protected Email $email;
+    protected Html $html;
+    protected Token $csrfToken;
     protected Database $database;
     protected Manager $manager;
+    private array $redirects;
+
+    public function __construct()
+    {
+        $this->redirects = require(REDIRECTS_FILE);
+
+        $this->config = new Config();
+        $this->cache = new Cache();
+        $this->data = new Data();
+        $this->key = new Key();
+        $this->email = new Email();
+        $this->html = new Html();
+        $this->csrfToken = new Token();
+    }
 
     public function setManager(): void
     {
@@ -30,25 +61,12 @@ abstract class Controller
 
     public function redirectToRoute(string $route): array
     {
-        switch ($route) {
-            case 'main_page':
-                $path = '/';
-
-                break;
-            case 'login_page':
-                $path = '/log-in';
-
-                break;
-            case 'logout_page':
-                $path = '/log-out';
-
-                break;
-            default:
-                $path = '/';
-
-                break;
+        if (isset($this->redirects[$route])) {
+            $path = $this->redirects[$route];
+        } else {
+            $path = '/';
         }
 
-        return array('redirection' => true, 'path' => $path);
+        return ['redirection' => true, 'path' => $path];
     }
 }

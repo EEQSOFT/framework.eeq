@@ -9,7 +9,7 @@ require(__DIR__ . '/../../src/autoload.php');
 use App\Core\{Config, CookieLogin, Data};
 
 $config = new Config();
-$cookieLogin = new CookieLogin($config);
+$cookieLogin = new CookieLogin();
 $data = new Data();
 
 $_GET['action'] ??= 'main_page';

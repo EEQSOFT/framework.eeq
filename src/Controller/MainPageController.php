@@ -4,31 +4,27 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Core\{Html, Token};
+use App\Core\Controller;
 use App\Service\MainPageService;
 use App\Validator\MainPageValidator;
 
-class MainPageController
+class MainPageController extends Controller
 {
     public function mainPageAction(array $request): array
     {
-        $html = new Html();
-        $csrfToken = new Token();
-        $mainPageValidator = new MainPageValidator($csrfToken);
+        $mainPageValidator = new MainPageValidator($this->csrfToken);
 
         $mainPageService = new MainPageService(
-            $html,
-            $csrfToken,
+            $this->html,
+            $this->csrfToken,
             $mainPageValidator
         );
 
-        $array = $mainPageService->mainPageAction(
+        return $mainPageService->mainPageAction(
             (string) ($request['lang'] ?? ''),
             (string) ($request['name'] ?? ''),
             (bool) ($request['submit'] ?? false),
             (string) ($request['token'] ?? '')
         );
-
-        return $array;
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-abstract class Validator
+abstract class Error
 {
     protected string $error;
 

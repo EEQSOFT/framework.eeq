@@ -16,7 +16,7 @@ class Query
     public function setParameter(string $search, $replace): self
     {
         if ($replace === false) {
-            $replace = '0';
+            $replace = 0;
         }
 
         $this->query = str_replace(

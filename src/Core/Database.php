@@ -56,7 +56,7 @@ class Database
         return mysqli_query($this->mysqlLink, $query);
     }
 
-    public function dbFetchArray($result): ?array
+    public function dbFetchArray($result): array|null|false
     {
         return mysqli_fetch_assoc($result);
     }

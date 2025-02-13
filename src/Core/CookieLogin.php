@@ -4,18 +4,11 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use App\Core\{Config, Controller};
+use App\Core\Controller;
 use App\Repository\UserRepository;
 
 class CookieLogin extends Controller
 {
-    protected Config $config;
-
-    public function __construct(Config $config)
-    {
-        $this->config = $config;
-    }
-
     public function setCookieLogin(): void
     {
         if (

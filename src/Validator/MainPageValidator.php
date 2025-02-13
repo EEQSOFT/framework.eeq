@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Validator;
 
-use App\Core\{Token, Validator};
+use App\Core\{Error, Token};
 
-class MainPageValidator extends Validator
+class MainPageValidator extends Error
 {
     protected Token $csrfToken;
 
