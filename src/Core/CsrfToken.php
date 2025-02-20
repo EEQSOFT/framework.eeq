@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-class Token
+class CsrfToken
 {
-    public function generateToken(string $name = 'token'): string
+    public function generateToken(string $name = 'csrf_token'): string
     {
         $token = '';
 
@@ -33,7 +33,7 @@ class Token
         return $token;
     }
 
-    public function receiveToken(string $name = 'token'): string
+    public function receiveToken(string $name = 'csrf_token'): string
     {
         $token = $_SESSION[$name] ?? $this->generateToken($name);
 
@@ -42,7 +42,7 @@ class Token
         return $token;
     }
 
-    public function receiveTokenOnly(string $name = 'token'): string
+    public function receiveTokenOnly(string $name = 'csrf_token'): string
     {
         return $_SESSION[$name] ?? $this->generateToken($name);
     }

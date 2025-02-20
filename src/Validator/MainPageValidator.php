@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Validator;
 
-use App\Core\{Error, Token};
+use App\Core\{CsrfToken, Error};
 
 class MainPageValidator extends Error
 {
-    protected Token $csrfToken;
+    protected CsrfToken $csrfToken;
 
-    public function __construct(Token $csrfToken)
+    public function __construct(CsrfToken $csrfToken)
     {
         parent::__construct();
 

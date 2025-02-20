@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Core\{Html, Token};
+use App\Core\{CsrfToken, Html};
 use App\Validator\MainPageValidator;
 
 class MainPageService
 {
     protected Html $html;
-    protected Token $csrfToken;
+    protected CsrfToken $csrfToken;
     protected MainPageValidator $mainPageValidator;
 
     public function __construct(
         Html $html,
-        Token $csrfToken,
+        CsrfToken $csrfToken,
         MainPageValidator $mainPageValidator
     ) {
         $this->html = $html;

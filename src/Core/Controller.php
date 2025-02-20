@@ -7,13 +7,13 @@ namespace App\Core;
 use App\Core\{
     Cache,
     Config,
+    CsrfToken,
     Data,
     Database,
     Email,
     Html,
     Key,
-    Manager,
-    Token
+    Manager
 };
 
 abstract class Controller
@@ -24,7 +24,7 @@ abstract class Controller
     protected Key $key;
     protected Email $email;
     protected Html $html;
-    protected Token $csrfToken;
+    protected CsrfToken $csrfToken;
     protected Database $database;
     protected Manager $manager;
     private array $redirects;
@@ -39,7 +39,7 @@ abstract class Controller
         $this->key = new Key();
         $this->email = new Email();
         $this->html = new Html();
-        $this->csrfToken = new Token();
+        $this->csrfToken = new CsrfToken();
     }
 
     public function setManager(): void

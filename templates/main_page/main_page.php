@@ -5,7 +5,7 @@
 
 <p><?= PAGE_MAIN_PAGE_FORM ?></p>
 
-<?php if ($array['error'] !== '') { ?>
+<?php if (!is_null($array['error'])) { ?>
     <p class="bad">
         <?= $array['error'] ?>
     </p>
