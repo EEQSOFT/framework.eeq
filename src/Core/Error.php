@@ -6,46 +6,46 @@ namespace App\Core;
 
 abstract class Error
 {
-    protected string $error;
+    protected ?array $error;
 
     public function __construct()
     {
-        $this->error = '';
+        $this->error = null;
     }
 
     public function addError(string $error): void
     {
-        $this->error .= $error . "\n";
+        $this->error[count($this->error ?? [])] = $error;
     }
 
-    protected function setError(string $error): void
+    public function setError(?array $error): void
     {
         $this->error = $error;
     }
 
     public function getError(): ?array
     {
-        $length = strlen($this->error);
-
-        if ($length >= 1) {
-            return explode("\n", substr($this->error, 0, ($length - 1)));
-        }
-
-        return null;
+        return $this->error;
     }
 
     public function getStrError(): string
     {
-        return $this->error;
+        $error = '';
+
+        foreach ($this->error as $key => $value) {
+            $error .= $value . "\n";
+        }
+
+        return $error;
     }
 
     public function isError(): bool
     {
-        return ($this->error !== '') ? true : false;
+        return ($this->error !== null) ? true : false;
     }
 
     public function isValid(): bool
     {
-        return ($this->error === '') ? true : false;
+        return ($this->error === null) ? true : false;
     }
 }

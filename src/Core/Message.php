@@ -6,49 +6,49 @@ namespace App\Core;
 
 abstract class Message
 {
-    protected string $message;
+    protected ?array $message;
     protected bool $ok;
 
     public function __construct()
     {
-        $this->message = '';
+        $this->message = null;
         $this->ok = false;
     }
 
     public function addMessage(string $message): void
     {
-        $this->message .= $message . "\n";
+        $this->message[count($this->message ?? [])] = $message;
     }
 
-    protected function setMessage(string $message): void
+    public function setMessage(?array $message): void
     {
         $this->message = $message;
     }
 
     public function getMessage(): ?array
     {
-        $length = strlen($this->message);
-
-        if ($length >= 1) {
-            return explode("\n", substr($this->message, 0, ($length - 1)));
-        }
-
-        return null;
+        return $this->message;
     }
 
     public function getStrMessage(): string
     {
-        return $this->message;
+        $message = '';
+
+        foreach ($this->message as $key => $value) {
+            $message .= $value . "\n";
+        }
+
+        return $message;
     }
 
     public function isMessage(): bool
     {
-        return ($this->message !== '') ? true : false;
+        return ($this->message !== null) ? true : false;
     }
 
     public function isValid(): bool
     {
-        return ($this->message === '') ? true : false;
+        return ($this->message === null) ? true : false;
     }
 
     public function setOk(bool $ok): void
