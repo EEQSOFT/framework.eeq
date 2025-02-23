@@ -14,9 +14,10 @@ $data = new Data();
 
 $_GET['action'] ??= 'main_page';
 
-$appSettings = require(SETTINGS_FILE);
-$settings = array_key_exists($_GET['action'], $appSettings)
-    ? $appSettings[$_GET['action']] : null;
+$actions = require(ACTIONS_FILE);
+$redirects = require(REDIRECTS_FILE);
+$settings = array_key_exists($_GET['action'], $actions)
+    ? $actions[$_GET['action']] : null;
 
 $cookieLogin->setCookieLogin();
 
@@ -27,7 +28,7 @@ $settings['name'] ??= 'MainPage';
 switch ($settings['role']) {
     case 'user':
         if (($_SESSION['user'] ?? '') === '') {
-            header('Location: ' . $config->getUrl() . '/log-in');
+            header('Location: ' . $config->getUrl() . $redirects['login_page']);
 
             exit;
         }
@@ -35,7 +36,7 @@ switch ($settings['role']) {
         break;
     case 'admin':
         if (($_SESSION['admin'] ?? false) === false) {
-            header('Location: ' . $config->getUrl() . '/log-in');
+            header('Location: ' . $config->getUrl() . $redirects['login_page']);
 
             exit;
         }
@@ -55,7 +56,8 @@ switch ($settings['option']) {
         $array = $controller->$method(
             $data->prepareInput($_REQUEST),
             $_SESSION,
-            $_FILES
+            $_FILES,
+            require(SETTINGS_FILE)
         );
 
         break;
