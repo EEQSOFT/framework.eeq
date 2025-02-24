@@ -14,17 +14,23 @@ class Database
     protected string $mysqlDatabase;
     protected string $mysqlNames;
 
-    public function __construct()
-    {
+    public function __construct(
+        string $mysqlHost = null,
+        int $mysqlPort = null,
+        string $mysqlUser = null,
+        string $mysqlPassword = null,
+        string $mysqlDatabase = null,
+        string $mysqlNames = null
+    ) {
         $database = require(DATABASE_FILE);
 
-        $this->mysqlHost = $database['db_host'];
-        $this->mysqlPort = $database['db_port'];
-        $this->mysqlUser = $database['db_user'];
-        $this->mysqlPassword = $database['db_password'];
+        $this->mysqlHost = $mysqlHost ?? $database['db_host'];
+        $this->mysqlPort = $mysqlPort ?? $database['db_port'];
+        $this->mysqlUser = $mysqlUser ?? $database['db_user'];
+        $this->mysqlPassword = $mysqlPassword ?? $database['db_password'];
         $this->mysqlLink = null;
-        $this->mysqlDatabase = $database['db_database'];
-        $this->mysqlNames = $database['db_names'];
+        $this->mysqlDatabase = $mysqlDatabase ?? $database['db_database'];
+        $this->mysqlNames = $mysqlNames ?? $database['db_names'];
 
         mysqli_report(MYSQLI_REPORT_OFF);
     }
