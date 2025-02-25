@@ -25,8 +25,8 @@ abstract class Controller
     protected Email $email;
     protected Html $html;
     protected CsrfToken $csrfToken;
-    protected Database $database;
-    protected Manager $manager;
+    protected array $database;
+    protected array $manager;
     private array $redirects;
 
     public function __construct()
@@ -42,21 +42,21 @@ abstract class Controller
         $this->csrfToken = new CsrfToken();
     }
 
-    public function setManager(): void
+    public function setManager(int|string $name = 0): void
     {
-        if (!isset($this->manager)) {
-            $this->database = new Database();
-            $this->manager = new Manager($this->database);
+        if (!isset($this->manager[$name])) {
+            $this->database[$name] = new Database($name);
+            $this->manager[$name] = new Manager($this->database[$name]);
 
-            $this->database->dbConnect();
+            $this->database[$name]->dbConnect();
         }
     }
 
-    public function getManager(): Manager
+    public function getManager(int|string $name = 0): Manager
     {
-        $this->setManager();
+        $this->setManager($name);
 
-        return $this->manager;
+        return $this->manager[$name];
     }
 
     public function redirectToRoute(string $route): array
