@@ -10,7 +10,7 @@ class Database
     protected int $mysqlPort;
     protected string $mysqlUser;
     protected string $mysqlPassword;
-    protected $mysqlLink;
+    protected mixed $mysqlLink;
     protected string $mysqlDatabase;
     protected string $mysqlNames;
 
@@ -51,17 +51,17 @@ class Database
             or die('Could not close the connection to MySQL');
     }
 
-    public function dbQuery(string $query)
+    public function dbQuery(string $query): mixed
     {
         return mysqli_query($this->mysqlLink, $query);
     }
 
-    public function dbFetchArray($result): array|null|false
+    public function dbFetchArray(mixed $result): array|null|false
     {
         return mysqli_fetch_assoc($result);
     }
 
-    public function dbNumberRows($result): int
+    public function dbNumberRows(mixed $result): int
     {
         return mysqli_num_rows($result);
     }
