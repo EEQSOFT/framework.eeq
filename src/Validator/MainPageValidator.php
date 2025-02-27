@@ -8,13 +8,10 @@ use App\Core\{CsrfToken, Error};
 
 class MainPageValidator extends Error
 {
-    protected CsrfToken $csrfToken;
-
-    public function __construct(CsrfToken $csrfToken)
-    {
+    public function __construct(
+        protected CsrfToken $csrfToken
+    ) {
         parent::__construct();
-
-        $this->csrfToken = $csrfToken;
     }
 
     public function validate(string $name, string $token): void

@@ -9,19 +9,11 @@ use App\Validator\MainPageValidator;
 
 class MainPageService
 {
-    protected Html $html;
-    protected CsrfToken $csrfToken;
-    protected MainPageValidator $mainPageValidator;
-
     public function __construct(
-        Html $html,
-        CsrfToken $csrfToken,
-        MainPageValidator $mainPageValidator
-    ) {
-        $this->html = $html;
-        $this->csrfToken = $csrfToken;
-        $this->mainPageValidator = $mainPageValidator;
-    }
+        protected Html $html,
+        protected CsrfToken $csrfToken,
+        protected MainPageValidator $mainPageValidator
+    ) {}
 
     public function mainPageAction(
         string $lang,

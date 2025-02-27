@@ -8,13 +8,11 @@ use App\Core\{Database, Query, Repository};
 
 class Manager
 {
-    protected Database $database;
     protected array $repository;
 
-    public function __construct(Database $database)
-    {
-        $this->database = $database;
-    }
+    public function __construct(
+        protected Database $database
+    ) {}
 
     public function getRepository(string $class): Repository
     {

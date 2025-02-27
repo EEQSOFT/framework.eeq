@@ -6,12 +6,9 @@ namespace App\Core;
 
 class Query
 {
-    protected string $query;
-
-    public function __construct(string $query)
-    {
-        $this->query = $query;
-    }
+    public function __construct(
+        protected string $query
+    ) {}
 
     public function setParameter(string $search, mixed $replace): self
     {
