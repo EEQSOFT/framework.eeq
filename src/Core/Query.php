@@ -13,7 +13,7 @@ class Query
         $this->query = $query;
     }
 
-    public function setParameter(string $search, $replace): self
+    public function setParameter(string $search, mixed $replace): self
     {
         if ($replace === false) {
             $replace = 0;
