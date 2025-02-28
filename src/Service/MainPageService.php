@@ -10,9 +10,9 @@ use App\Validator\MainPageValidator;
 class MainPageService
 {
     public function __construct(
-        protected Html $html,
-        protected CsrfToken $csrfToken,
-        protected MainPageValidator $mainPageValidator
+        protected readonly Html $html,
+        protected readonly CsrfToken $csrfToken,
+        protected readonly MainPageValidator $mainPageValidator
     ) {}
 
     public function mainPageAction(

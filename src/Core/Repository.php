@@ -9,7 +9,7 @@ use App\Core\{Database, Manager};
 abstract class Repository
 {
     public function __construct(
-        protected Database $database,
-        protected Manager $manager
+        protected readonly Database $database,
+        protected readonly Manager $manager
     ) {}
 }

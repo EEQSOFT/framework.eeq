@@ -11,7 +11,7 @@ class Manager
     protected array $repository;
 
     public function __construct(
-        protected Database $database
+        protected readonly Database $database
     ) {}
 
     public function getRepository(string $class): Repository

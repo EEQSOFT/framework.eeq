@@ -9,7 +9,7 @@ use App\Core\{CsrfToken, Error};
 class MainPageValidator extends Error
 {
     public function __construct(
-        protected CsrfToken $csrfToken
+        protected readonly CsrfToken $csrfToken
     ) {
         parent::__construct();
     }

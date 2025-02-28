@@ -6,13 +6,13 @@ namespace App\Core;
 
 class Database
 {
-    protected string $mysqlHost;
-    protected int $mysqlPort;
-    protected string $mysqlUser;
-    protected string $mysqlPassword;
+    protected readonly string $mysqlHost;
+    protected readonly int $mysqlPort;
+    protected readonly string $mysqlUser;
+    protected readonly string $mysqlPassword;
     protected mixed $mysqlLink;
-    protected string $mysqlDatabase;
-    protected string $mysqlNames;
+    protected readonly string $mysqlDatabase;
+    protected readonly string $mysqlNames;
 
     public function __construct(int|string $name = 0)
     {
