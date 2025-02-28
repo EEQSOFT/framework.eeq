@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-class Config
+readonly class Config
 {
     protected string $url;
     protected int $serverPort;
@@ -18,15 +18,18 @@ class Config
 
     public function __construct()
     {
+        $settings = require(SETTINGS_FILE);
+
         $this->serverPort = (int) $_SERVER['SERVER_PORT'];
         $this->url = 'http' . (($this->serverPort === 443) ? 's' : '') . '://'
             . $_SERVER['HTTP_HOST'];
         $this->serverName = $_SERVER['SERVER_NAME'];
         $this->serverDomain = preg_replace('/^www\./i', '', $this->serverName);
         $this->serverEmail = 'contact@' . $this->serverDomain;
-        $this->adminEmail = $this->serverEmail;
+        $this->adminEmail = $settings['admin_email'] ?? $this->serverEmail;
         $this->remoteAddress = $_SERVER['REMOTE_ADDR'];
         $this->dateTimeNow = date('Y-m-d H:i:s');
+        $this->appVersion = $settings['app_version'];
     }
 
     public function getUrl(): string
@@ -67,5 +70,10 @@ class Config
     public function getDateTimeNow(): string
     {
         return $this->dateTimeNow;
+    }
+
+    public function getAppVersion(): string
+    {
+        return $this->appVersion;
     }
 }

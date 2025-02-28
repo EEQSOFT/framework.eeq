@@ -18,16 +18,16 @@ use App\Core\{
 
 abstract class Controller
 {
-    protected Config $config;
-    protected Cache $cache;
-    protected Data $data;
-    protected Key $key;
-    protected Email $email;
-    protected Html $html;
-    protected CsrfToken $csrfToken;
+    protected readonly Config $config;
+    protected readonly Cache $cache;
+    protected readonly Data $data;
+    protected readonly Key $key;
+    protected readonly Email $email;
+    protected readonly Html $html;
+    protected readonly CsrfToken $csrfToken;
     protected array $database;
     protected array $manager;
-    private array $redirects;
+    private readonly array $redirects;
 
     public function __construct()
     {
