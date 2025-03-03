@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`user_id`, `user_admin`, `user_active`, `user_login`, `user_login_canonical`, `user_email`, `user_email_canonical`, `user_password`, `user_key`) VALUES
 (1, 0, 1, 'User', 'user', 'user@framework.eeq', 'user@framework.eeq', '', ''),
-(2, 1, 1, 'Admin', 'admin', 'admin@framework.eeq', 'admin@framework.eeq', '', ''),
+(2, 1, 1, 'Admin', 'admin', 'admin@framework.eeq', 'admin@framework.eeq', '', '');
 
 CREATE TABLE IF NOT EXISTS `language` (
     `language_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
