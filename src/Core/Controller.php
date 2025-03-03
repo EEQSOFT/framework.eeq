@@ -9,11 +9,11 @@ use App\Core\{
     Config,
     CsrfToken,
     Data,
-    Database,
     Email,
     Html,
     Key,
-    Manager
+    Manager,
+    Mysqli
 };
 
 abstract class Controller
@@ -42,17 +42,17 @@ abstract class Controller
         $this->csrfToken = new CsrfToken();
     }
 
-    public function setManager(int|string $name = 0): void
+    public function setManager(string $name = 'Mysqli'): void
     {
         if (!isset($this->manager[$name])) {
-            $this->database[$name] = new Database($name);
+            $this->database[$name] = new $name($name);
             $this->manager[$name] = new Manager($this->database[$name]);
 
-            $this->database[$name]->dbConnect();
+            $this->database[$name]->connect();
         }
     }
 
-    public function getManager(int|string $name = 0): Manager
+    public function getManager(string $name = 'Mysqli'): Manager
     {
         $this->setManager($name);
 

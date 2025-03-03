@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-abstract class Message
+use App\Core\Validator;
+
+abstract class Message implements Validator
 {
     protected ?array $message;
     protected bool $ok;

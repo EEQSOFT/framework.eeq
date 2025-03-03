@@ -23,15 +23,13 @@ class UserRepository extends Repository
             ->setParameter('date', $date)
             ->getStrQuery();
 
-        return $this->database->dbQuery($query);
+        return $this->database->query($query);
     }
 
     public function getCookieLoginUserData(
         string $login,
         string $password
-    ): array {
-        $array = [];
-
+    ): ?array {
         $query = $this->manager->createQuery(
             "SELECT u.`user_id`, u.`user_admin`, u.`user_active`,
                 u.`user_login` FROM `user` u
@@ -42,9 +40,15 @@ class UserRepository extends Repository
             ->setParameter('password', $password)
             ->getStrQuery();
 
-        $result = $this->database->dbQuery($query);
+        if ($this->database->query($query)) {
+            $result = $this->database->result();
+        } else {
+            return null;
+        }
 
-        if (is_array($row = $this->database->dbFetchArray($result))) {
+        $array = [];
+
+        if (is_array($row = $this->database->fetchArray($result))) {
             $array['user_id'] = (int) $row['user_id'];
             $array['user_admin'] = (bool) $row['user_admin'];
             $array['user_active'] = (bool) $row['user_active'];

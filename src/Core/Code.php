@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-abstract class Code
+use App\Core\Validator;
+
+abstract class Code implements Validator
 {
     protected int $code;
 
