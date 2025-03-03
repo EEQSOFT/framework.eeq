@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-abstract class Error
+use App\Core\Validator;
+
+abstract class Error implements Validator
 {
     protected ?array $error;
 

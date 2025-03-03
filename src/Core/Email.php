@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-class Email
+use App\Core\Mail;
+
+class Email implements Mail
 {
     public function sendEmail(
         string $serverName,
