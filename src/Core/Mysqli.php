@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use App\Core\Database;
+
 class Mysqli implements Database
 {
     protected readonly string $mysqlHost;
@@ -53,26 +55,21 @@ class Mysqli implements Database
             or die('Could not close the connection to MySQL');
     }
 
-    public function query(string $query): bool
+    public function query(string $query): mixed
     {
         $this->mysqlResult = mysqli_query($this->mysqlLink, $query);
 
-        return (bool) $this->mysqlResult;
-    }
-    
-    public function result(): mixed
-    {
         return $this->mysqlResult;
     }
 
-    public function fetchArray(mixed $result): array|null|false
+    public function fetchArray(mixed $result = null): array|null|false
     {
-        return mysqli_fetch_assoc($result);
+        return mysqli_fetch_assoc($result ?? $this->mysqlResult);
     }
 
-    public function numberRows(mixed $result): int
+    public function numberRows(mixed $result = null): int
     {
-        return mysqli_num_rows($result);
+        return mysqli_num_rows($result ?? $this->mysqlResult);
     }
 
     public function affectedRows(): int
@@ -87,16 +84,16 @@ class Mysqli implements Database
 
     public function startTransaction(): bool
     {
-        return $this->dbQuery('START TRANSACTION');
+        return $this->query('START TRANSACTION');
     }
 
     public function commit(): bool
     {
-        return $this->dbQuery('COMMIT');
+        return $this->query('COMMIT');
     }
 
     public function rollback(): bool
     {
-        return $this->dbQuery('ROLLBACK');
+        return $this->query('ROLLBACK');
     }
 }

@@ -15,6 +15,7 @@ class MainPageController extends Controller
         $mainPageValidator = new MainPageValidator($this->csrfToken);
 
         $mainPageService = new MainPageService(
+            $this,
             $this->html,
             $this->csrfToken,
             $mainPageValidator

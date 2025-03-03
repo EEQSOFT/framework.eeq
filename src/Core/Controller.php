@@ -9,11 +9,11 @@ use App\Core\{
     Config,
     CsrfToken,
     Data,
+    Database,
     Email,
     Html,
     Key,
-    Manager,
-    Mysqli
+    Manager
 };
 
 abstract class Controller
@@ -45,7 +45,9 @@ abstract class Controller
     public function setManager(string $name = 'Mysqli'): void
     {
         if (!isset($this->manager[$name])) {
-            $this->database[$name] = new $name($name);
+            $class = 'App\\Core\\' . $name;
+
+            $this->database[$name] = new $class($name);
             $this->manager[$name] = new Manager($this->database[$name]);
 
             $this->database[$name]->connect();
