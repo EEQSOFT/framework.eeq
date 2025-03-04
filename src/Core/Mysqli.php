@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use App\Core\Database;
+use App\Core\{AppException, Database};
 
 class Mysqli implements Database
 {
@@ -41,10 +41,10 @@ class Mysqli implements Database
             $this->mysqlPassword,
             '',
             $this->mysqlPort
-        ) or die('Could not connect to MySQL');
+        ) or throw new AppException('Could not connect to MySQL');
 
         mysqli_select_db($this->mysqlLink, $this->mysqlDatabase)
-            or die('Could not choose the database');
+            or throw new AppException('Could not choose the database');
 
         mysqli_set_charset($this->mysqlLink, $this->mysqlNames);
     }
@@ -52,7 +52,9 @@ class Mysqli implements Database
     public function close(): void
     {
         mysqli_close($this->mysqlLink)
-            or die('Could not close the connection to MySQL');
+            or throw new AppException(
+                'Could not close the connection to MySQL'
+            );
     }
 
     public function query(string $query): mixed
