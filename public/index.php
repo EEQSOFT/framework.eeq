@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Core\AppException;
 
 try {
     require(__DIR__ . '/../inc/public/index.php');
 } catch (AppException $e) {
-    echo $e->getMessage();
+    $message = $e->getMessage();
 
-    exit;
+    require(__DIR__ . '/../inc/public/exception.php');
 }
