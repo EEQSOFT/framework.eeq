@@ -6,7 +6,7 @@ require(__DIR__ . '/../../config/config.php');
 require(__DIR__ . '/../../inc/core/core.php');
 require(__DIR__ . '/../../src/autoload.php');
 
-use App\Core\{AppException, Config, CookieLogin, Data};
+use App\Core\{Config, CookieLogin, Data};
 
 $config = new Config();
 $cookieLogin = new CookieLogin();
@@ -51,55 +51,37 @@ switch ($settings['option']) {
         $class = 'App\\Controller\\' . $settings['name'] . 'Controller';
         $method = $settings['name'] . 'Action';
 
-        try {
-            $controller = new $class();
+        $controller = new $class();
 
-            $array = $controller->$method(
-                $data->prepareInput($_REQUEST),
-                $_SESSION,
-                $_FILES,
-                require(SETTINGS_FILE)
-            );
-        } catch (AppException $e) {
-            echo $e->getMessage();
-
-            exit;
-        }
+        $array = $controller->$method(
+            $data->prepareInput($_REQUEST),
+            $_SESSION,
+            $_FILES,
+            require(SETTINGS_FILE)
+        );
 
         break;
     case 'ajax':
         $class = 'App\\Controller\\Ajax\\' . $settings['name'] . 'Controller';
         $method = $settings['name'] . 'Action';
 
-        try {
-            $controller = new $class();
+        $controller = new $class();
 
-            $array = $controller->$method($data->prepareInput($_REQUEST));
-        } catch (AppException $e) {
-            echo $e->getMessage();
-
-            exit;
-        }
+        $array = $controller->$method($data->prepareInput($_REQUEST));
 
         break;
     case 'api':
         $class = 'App\\Controller\\Api\\' . $settings['name'] . 'Controller';
         $method = $settings['name'] . 'Action';
 
-        try {
-            $controller = new $class();
+        $controller = new $class();
 
-            $array = $controller->$method(
-                $_SERVER,
-                $data->prepareInput(
-                    json_decode(file_get_contents('php://input'), true) ?? []
-                )
-            );
-        } catch (AppException $e) {
-            echo $e->getMessage();
-
-            exit;
-        }
+        $array = $controller->$method(
+            $_SERVER,
+            $data->prepareInput(
+                json_decode(file_get_contents('php://input'), true) ?? []
+            )
+        );
 
         if ($array['redirection'] ?? false) break;
 
