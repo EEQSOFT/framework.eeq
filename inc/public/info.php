@@ -1,8 +1,6 @@
 <?php
 
 require_once(__DIR__ . '/../../config/config.php');
-
-$code = (int) ($_GET['code'] ?? 404);
 ?>
 
 <!DOCTYPE html>
@@ -12,20 +10,16 @@ $code = (int) ($_GET['code'] ?? 404);
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
 
-        <title>Error <?= $code ?></title>
+        <title><?= $title ?></title>
 
         <style>
             body {
                 margin: 30px;
             }
 
-            h1, a, p {
-                color: #000;
+            h1, p {
                 font-family: Arial, Helvetica, sans-serif;
                 font-size: 20px;
-                font-weight: bold;
-                text-decoration: none;
-                text-transform: uppercase;
                 text-align: center;
                 line-height: 20px;
             }
@@ -33,11 +27,8 @@ $code = (int) ($_GET['code'] ?? 404);
             h1 {
                 margin-bottom: 6px;
                 font-size: 40px;
+                text-transform: uppercase;
                 line-height: 40px;
-            }
-
-            a:hover {
-                color: #f00;
             }
 
             p {
@@ -47,8 +38,8 @@ $code = (int) ($_GET['code'] ?? 404);
     </head>
 
     <body>
-        <h1>Error <?= $code ?></h1>
+        <h1><?= $title ?></h1>
 
-        <p><a href="/">Back to the main page</a></p>
+        <p><?= $message ?></p>
     </body>
 </html>

@@ -1,7 +1,10 @@
 <?php
 
 if (!file_exists(__DIR__ . '/../../translations/messages.' . $lang . '.php')) {
-    echo 'Unsupported language';
+    $title = 'Information';
+    $message = 'Unsupported language';
+
+    require(__DIR__ . '/../../inc/public/info.php');
 
     exit;
 }
