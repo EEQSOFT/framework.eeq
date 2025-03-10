@@ -35,7 +35,7 @@ class Mysqli implements Database
 
     public function connect(): void
     {
-        $this->mysqlLink = @mysqli_connect(
+        $this->mysqlLink = mysqli_connect(
             $this->mysqlHost,
             $this->mysqlUser,
             $this->mysqlPassword,

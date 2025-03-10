@@ -9,7 +9,6 @@ use App\Core\{
     Config,
     CsrfToken,
     Data,
-    Database,
     Email,
     Html,
     Key,
