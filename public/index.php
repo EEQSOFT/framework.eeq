@@ -2,7 +2,13 @@
 
 declare(strict_types=1);
 
-use App\Core\AppException;
+require(__DIR__ . '/../config/config.php');
+require(__DIR__ . '/../inc/core/core.php');
+require(__DIR__ . '/../src/autoload.php');
+
+use App\Core\{AppException, ErrorHandler};
+
+new ErrorHandler();
 
 try {
     require(__DIR__ . '/../inc/public/index.php');

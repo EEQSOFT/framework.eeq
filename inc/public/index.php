@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-require(__DIR__ . '/../../config/config.php');
-require(__DIR__ . '/../../inc/core/core.php');
-require(__DIR__ . '/../../src/autoload.php');
+require_once(__DIR__ . '/../../config/config.php');
+require_once(__DIR__ . '/../../inc/core/core.php');
+require_once(__DIR__ . '/../../src/autoload.php');
 
 use App\Core\{Config, CookieLogin, Data};
 
