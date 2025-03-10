@@ -15,6 +15,7 @@ const DATABASE_FILE = __DIR__ . '/database.php';
 const ACTIONS_FILE = __DIR__ . '/actions.php';
 const REDIRECTS_FILE = __DIR__ . '/redirects.php';
 const SETTINGS_FILE = __DIR__ . '/settings.php';
+const ERROR_LOG_FILE = __DIR__ . '/../error.log';
 const CORE_FILE = __DIR__ . '/../inc/core/core.php';
 const AUTOLOAD_FILE = __DIR__ . '/../src/autoload.php';
 
