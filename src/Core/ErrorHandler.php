@@ -103,6 +103,6 @@ class ErrorHandler
 
         fclose($fh);
 
-        return ($status) ? true : false;
+        return (bool) $status;
     }
 }
