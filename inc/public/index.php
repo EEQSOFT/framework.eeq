@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/../../config/config.php');
 require_once(__DIR__ . '/../../inc/core/core.php');
-require_once(__DIR__ . '/../../src/autoload.php');
+require_once(__DIR__ . '/../../vendor/autoload.php');
 
 use App\Core\{Config, CookieLogin, Data};
 
