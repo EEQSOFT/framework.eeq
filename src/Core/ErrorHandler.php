@@ -16,8 +16,8 @@ class ErrorHandler
     public function handleError(
         int $code,
         string $description,
-        string $file = null,
-        int $line = null
+        string $file,
+        int $line
     ): bool {
         $displayErrors = ini_get('display_errors');
         $displayErrors = strtolower($displayErrors);

@@ -1,4 +1,6 @@
 /config/database.php
+/config/settings.php
 /phpunit.xml
+/.phpunit.result.cache
 /error.log
 /vendor/

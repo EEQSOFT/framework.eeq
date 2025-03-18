@@ -107,7 +107,8 @@ if ($array['redirection'] ?? false) {
     exit;
 }
 
-$array['canonical_url'] ??= $_SERVER['REQUEST_SCHEME'] . '://'
+$array['canonical_url'] ??= 'http'
+    . (((int) $_SERVER['SERVER_PORT'] === 443) ? 's' : '') . '://'
     . $_SERVER['HTTP_HOST'] . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $array['main_url'] = $config->getUrl();
 $array['url'] = $array['main_url'] . $lp;
