@@ -6,16 +6,14 @@
          backupGlobals="false"
          colors="true"
          bootstrap="tests/bootstrap.php"
-         convertDeprecationsToExceptions="false"
 >
-
     <php>
         <ini name="display_errors" value="1" />
         <ini name="error_reporting" value="-1" />
         <server name="APP_ENV" value="test" force="true" />
         <server name="SHELL_VERBOSITY" value="-1" />
         <server name="PHPUNIT_REMOVE" value="" />
-        <server name="PHPUNIT_VERSION" value="9.6" />
+        <server name="PHPUNIT_VERSION" value="9.5" />
     </php>
 
     <testsuites>
@@ -24,15 +22,7 @@
         </testsuite>
     </testsuites>
 
-    <coverage processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
-    </coverage>
-
-    <listeners>
-    </listeners>
-
     <extensions>
+        <extension class="Symfony\Component\Panther\ServerExtension" />
     </extensions>
 </phpunit>

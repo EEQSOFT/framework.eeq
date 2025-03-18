@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+    php-apache-environment:
+        container_name: fwe-php-apache
+        build:
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - fwe-mysql
+        ports:
+            - '8000:80'
+        volumes:
+            - .:/var/www/html
+            - ./php-apache.conf:/etc/apache2/sites-enabled/000-default.conf
+    fwe-mysql:
+        container_name: fwe-mysql
+        image: mysql:8.0
+        restart: always
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: true
+            MYSQL_ROOT_PASSWORD:
+            MYSQL_DATABASE: framework
+            MYSQL_USER: framework
+            MYSQL_PASSWORD: 1234567890
+        ports:
+            - '9906:3306'
+    phpmyadmin:
+        container_name: fwe-pma
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        environment:
+            PMA_ARBITRARY: 1
+            PMA_HOST: fwe-mysql
+            PMA_PORT: 3306
+            UPLOAD_LIMIT: 100M
+        depends_on:
+            - fwe-mysql
+        ports:
+            - '8001:80'

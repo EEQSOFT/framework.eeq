@@ -2,10 +2,10 @@
 
 return [
     'Mysqli' => [
-        'db_host' => 'localhost',
+        'db_host' => 'fwe-mysql',
         'db_port' => 3306,
-        'db_user' => 'root',
-        'db_password' => '',
+        'db_user' => 'framework',
+        'db_password' => '1234567890',
         'db_database' => 'framework',
         'db_names' => 'utf8mb4',
         'db_collate' => 'utf8mb4_unicode_ci'
