@@ -6,7 +6,8 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.4"
+        "php": ">=8.4",
+        "symfony/mime": "^7.2"
     },
     "autoload": {
         "psr-4": {

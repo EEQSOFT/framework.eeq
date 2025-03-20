@@ -16,6 +16,7 @@ $_GET['action'] ??= 'main_page';
 
 $actions = require(ACTIONS_FILE);
 $redirects = require(REDIRECTS_FILE);
+$appSettings = require(SETTINGS_FILE);
 $settings = array_key_exists($_GET['action'], $actions)
     ? $actions[$_GET['action']] : null;
 
@@ -57,7 +58,7 @@ switch ($settings['option']) {
             $data->prepareInput($_REQUEST),
             $_SESSION,
             $_FILES,
-            require(SETTINGS_FILE)
+            $appSettings
         );
 
         break;

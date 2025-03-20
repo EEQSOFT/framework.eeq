@@ -87,7 +87,7 @@ docker-compose down
 
 ## Composer
 
-### 1. Install Composer
+### 1. Install the needed dependencies from the composer.json file
 
 ```
 docker exec -it fwe-php-apache bash
@@ -97,7 +97,7 @@ composer install
 
 ## Tests
 
-### 1. Run your tests in PHPUnit
+### 1. Run the PHPUnit tests
 
 ```
 docker exec -it fwe-php-apache vendor/bin/phpunit tests
