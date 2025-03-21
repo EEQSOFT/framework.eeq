@@ -3,4 +3,5 @@
 /phpunit.xml
 /.phpunit.result.cache
 /error.log
+/composer.lock
 /vendor/
