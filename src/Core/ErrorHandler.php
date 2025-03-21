@@ -37,6 +37,7 @@ class ErrorHandler
             'line' => $line,
             'message' => $error . ' (' . $code . '): ' . $description
                 . ' in [' . $file . ', line ' . $line . ']'
+                . ' - ' . date('Y-m-d H:i:s')
         ];
 
         return $this->fileLog($data);
@@ -93,15 +94,15 @@ class ErrorHandler
         mixed $logData,
         string $fileName = ERROR_LOG_FILE
     ): bool {
-        $fh = fopen($fileName, 'a+');
+        $file = fopen($fileName, 'a+');
 
         if (is_array($logData)) {
             $logData = print_r($logData, true);
         }
 
-        $status = fwrite($fh, $logData);
+        $status = fwrite($file, $logData);
 
-        fclose($fh);
+        fclose($file);
 
         return (bool) $status;
     }
