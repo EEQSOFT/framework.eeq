@@ -1,20 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Core\Data;
 
-function prepareUtf8Text($text) {
-    return Data::prepareUtf8Text((string) $text);
+function prepareUtf8Text(string $text): string {
+    return Data::prepareUtf8Text($text);
 }
 
-function prepareUrlText($text) {
-    return Data::prepareUrlText((string) $text);
+function prepareUrlText(string $text): string {
+    return Data::prepareUrlText($text);
 }
 
-function prepareHtmlText($text) {
+function prepareHtmlText(string $text): string {
     return str_replace(array("\r\n", "\n", "\r"), '<br>', $text);
 }
 
-function prepareDescText($text) {
+function prepareDescText(string $text): string {
     $text = str_replace(array("\r\n", "\n", "\r"), ' ', $text);
 
     if (strlen($text) > 200) {
