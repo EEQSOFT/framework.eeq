@@ -17,35 +17,26 @@ class MainPageControllerTest extends PantherTestCase
         $browser->request('GET', '/');
         $response = $browser->getResponse();
 
-        preg_match(
-            '/<title>(PHP Framework from EEQSOFT)<\/title>/',
-            (string) $response,
-            $matches
+        $this->assertStringContainsString(
+            '<title>PHP Framework from EEQSOFT</title>',
+            (string) $response
         );
-
-        $this->assertEquals($matches[1], 'PHP Framework from EEQSOFT');
 
         $browser->clickLink('Polish');
         $response = $browser->getResponse();
 
-        preg_match(
-            '/<title>(PHP Framework od EEQSOFT)<\/title>/',
-            (string) $response,
-            $matches
+        $this->assertStringContainsString(
+            '<title>PHP Framework od EEQSOFT</title>',
+            (string) $response
         );
-
-        $this->assertEquals($matches[1], 'PHP Framework od EEQSOFT');
 
         $browser->clickLink('Angielski');
         $browser->submitForm('Confirm', ['name' => 'Robert']);
         $response = $browser->getResponse();
 
-        preg_match(
-            '/(Welcome, Robert!)/',
-            (string) $response,
-            $matches
+        $this->assertStringContainsString(
+            'Welcome, Robert!',
+            (string) $response
         );
-
-        $this->assertEquals($matches[1], 'Welcome, Robert!');
     }
 }
