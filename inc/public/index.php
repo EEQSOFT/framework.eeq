@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-require_once(__DIR__ . '/../../config/config.php');
-require_once(__DIR__ . '/../../inc/core/core.php');
-require_once(__DIR__ . '/../../vendor/autoload.php');
+require_once dirname(__DIR__, 2) . '/config/config.php';
+require_once dirname(__DIR__, 2) . '/inc/core/core.php';
+require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
 
 use App\Core\{Config, CookieLogin, Data};
 
@@ -117,7 +117,7 @@ $array['url'] = $array['main_url'] . $lp;
 $array = $data->prepareOutput($array);
 
 if ($settings['option'] === 'ajax') {
-    include('../templates/' . $array['content']);
+    include '../templates/' . $array['content'];
 } else {
-    include('../templates/' . ($array['layout'] ?? 'layout/main/main.php'));
+    include '../templates/' . ($array['layout'] ?? 'layout/main/main.php');
 }

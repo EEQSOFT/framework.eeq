@@ -18,7 +18,7 @@ readonly class Config
 
     public function __construct()
     {
-        $settings = require(SETTINGS_FILE);
+        $settings = require SETTINGS_FILE;
 
         $this->serverPort = (int) $_SERVER['SERVER_PORT'];
         $this->url = 'http' . (($this->serverPort === 443) ? 's' : '') . '://'
