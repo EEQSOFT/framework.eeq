@@ -3,7 +3,7 @@
 
 <title><?= $array['title'] ?></title>
 
-<?php include('meta.php'); ?>
+<?php include 'meta.php'; ?>
 
 <link rel="canonical" href="<?= $array['canonical_url'] ?>">
 <link rel="icon" href="<?= $array['main_url'] ?>/images/favicon.ico">

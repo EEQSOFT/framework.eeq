@@ -19,7 +19,7 @@ class Mysqli implements Database
 
     public function __construct(string $name = 'Mysqli')
     {
-        $database = require(DATABASE_FILE);
+        $database = require DATABASE_FILE;
 
         $this->mysqlHost = $database[$name]['db_host'];
         $this->mysqlPort = $database[$name]['db_port'];

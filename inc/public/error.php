@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../../config/config.php');
+require_once dirname(__DIR__, 2) . '/config/config.php';
 
 $code = (int) ($_GET['code'] ?? 404);
 ?>

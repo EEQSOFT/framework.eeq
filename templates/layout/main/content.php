@@ -3,5 +3,5 @@
 </div>
 
 <div id="record">
-    <?php include('../templates/' . $array['content']); ?>
+    <?php include '../templates/' . $array['content']; ?>
 </div>

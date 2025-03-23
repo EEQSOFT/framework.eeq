@@ -30,7 +30,7 @@ abstract class Controller
 
     public function __construct()
     {
-        $this->redirects = require(REDIRECTS_FILE);
+        $this->redirects = require REDIRECTS_FILE;
 
         $this->config = new Config();
         $this->cache = new Cache();

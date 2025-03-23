@@ -7,29 +7,29 @@ ob_start();
 
 <html lang="<?= $lang ?>">
     <head>
-        <?php include('head.php'); ?>
+        <?php include 'head.php'; ?>
     </head>
 
     <body>
         <div id="page">
             <header id="header">
-                <?php include('header.php'); ?>
+                <?php include 'header.php'; ?>
             </header>
 
             <nav id="menu">
-                <?php include('menu.php'); ?>
+                <?php include 'menu.php'; ?>
             </nav>
 
             <section id="content">
-                <?php include('content.php'); ?>
+                <?php include 'content.php'; ?>
             </section>
 
             <footer id="footer">
-                <?php include('footer.php'); ?>
+                <?php include 'footer.php'; ?>
             </footer>
         </div>
 
-        <?php include('foot.php'); ?>
+        <?php include 'foot.php'; ?>
     </body>
 </html>
 
