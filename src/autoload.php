@@ -13,7 +13,7 @@ spl_autoload_register(function ($class) {
     $file = $directory . str_replace('\\', '/', $relativeClass) . '.php';
 
     if (file_exists($file)) {
-        require_once($file);
+        require_once $file;
     }
 
     if (method_exists($class, 'init')) {
