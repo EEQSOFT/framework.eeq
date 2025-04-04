@@ -31,11 +31,20 @@ class MainPageControllerTest extends PantherTestCase
         );
 
         $browser->clickLink('Angielski');
-        $browser->submitForm('Confirm', ['name' => 'Robert']);
+        $browser->submitForm('Confirm', ['name' => 'ADMIN']);
         $response = $browser->getResponse();
 
         $this->assertStringContainsString(
-            'Welcome, Robert!',
+            'Welcome, Admin!',
+            (string) $response
+        );
+
+        $browser->clickLink('Polish');
+        $browser->submitForm('Potwierdź', ['name' => 'USER']);
+        $response = $browser->getResponse();
+
+        $this->assertStringContainsString(
+            'Witamy, User!',
             (string) $response
         );
     }
