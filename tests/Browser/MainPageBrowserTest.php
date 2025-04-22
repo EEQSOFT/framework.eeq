@@ -24,7 +24,10 @@ class MainPageBrowserTest extends PantherTestCase
         $statusCode = $response->getStatusCode();
 
         $this->assertEquals(200, $statusCode);
+    }
 
+    public function testPolishMainPageStatusCode(): void
+    {
         $this->browser->request('GET', '/pl/');
         $response = $this->browser->getResponse();
         $statusCode = $response->getStatusCode();
@@ -41,7 +44,10 @@ class MainPageBrowserTest extends PantherTestCase
             '<title>PHP Framework from EEQSOFT</title>',
             (string) $response
         );
+    }
 
+    public function testPolishMainPageTitle(): void
+    {
         $this->browser->request('GET', '/pl/');
         $response = $this->browser->getResponse();
 
@@ -51,9 +57,10 @@ class MainPageBrowserTest extends PantherTestCase
         );
     }
 
-    public function testMainPageForm(): void
+    public function testMainPageLinkAndForm(): void
     {
-        $this->browser->request('GET', '/');
+        $this->browser->request('GET', '/pl/');
+        $this->browser->clickLink('Angielski');
         $this->browser->submitForm('Confirm', ['name' => 'ADMIN']);
         $response = $this->browser->getResponse();
 
@@ -61,7 +68,11 @@ class MainPageBrowserTest extends PantherTestCase
             'Welcome, Admin!',
             (string) $response
         );
+    }
 
+    public function testPolishMainPageLinkAndForm(): void
+    {
+        $this->browser->request('GET', '/');
         $this->browser->clickLink('Polish');
         $this->browser->submitForm('Potwierdź', ['name' => 'USER']);
         $response = $this->browser->getResponse();

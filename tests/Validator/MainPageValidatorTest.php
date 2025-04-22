@@ -10,27 +10,42 @@ use PHPUnit\Framework\TestCase;
 
 class MainPageValidatorTest extends TestCase
 {
-    public function testMainPageValidator(): void
+    protected readonly string $token;
+    protected readonly CsrfToken $csrfToken;
+    protected readonly MainPageValidator $validator;
+
+    public function setUp(): void
     {
-        $csrfToken = $this->createMock(CsrfToken::class);
-        $csrfToken->expects($this->exactly(3))
-                  ->method('receiveToken')
-                  ->will($this->returnValue($token = '1234567890'));
+        $this->token = '1234567890';
 
-        $validator = new MainPageValidator($csrfToken);
+        $this->csrfToken = $this->createMock(CsrfToken::class);
+        $this->csrfToken->expects($this->once())
+                        ->method('receiveToken')
+                        ->will($this->returnValue($this->token));
 
-        $validator->validate('Name', $token);
-        $valid = $validator->isValid();
+        $this->validator = new MainPageValidator($this->csrfToken);
+    }
+
+    public function testRegularNameParameterIsValid(): void
+    {
+        $this->validator->validate('Name', $this->token);
+        $valid = $this->validator->isValid();
 
         $this->assertTrue($valid);
+    }
 
-        $validator->validate('', $token);
-        $valid = $validator->isValid();
+    public function testEmptyNameParameterIsNotValid(): void
+    {
+        $this->validator->validate('', $this->token);
+        $valid = $this->validator->isValid();
 
         $this->assertFalse($valid);
+    }
 
-        $validator->validate('123456789012345678901', $token);
-        $valid = $validator->isValid();
+    public function testTooLongNameParameterIsNotValid(): void
+    {
+        $this->validator->validate('123456789012345678901', $this->token);
+        $valid = $this->validator->isValid();
 
         $this->assertFalse($valid);
     }
