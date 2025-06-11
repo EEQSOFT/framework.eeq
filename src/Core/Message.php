@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use App\Core\Validator;
-
-abstract class Message implements Validator
+class Message
 {
     protected ?array $message;
     protected bool $ok;
@@ -46,11 +44,6 @@ abstract class Message implements Validator
     public function isMessage(): bool
     {
         return ($this->message !== null) ? true : false;
-    }
-
-    public function isValid(): bool
-    {
-        return ($this->message === null) ? true : false;
     }
 
     public function setOk(bool $ok): void

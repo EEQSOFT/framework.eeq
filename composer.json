@@ -1,13 +1,12 @@
 {
     "name": "eeqsoft/framework.eeq",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "description": "A minimal framework project recommended to create applications",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.4",
-        "symfony/mime": "^7.2"
+        "php": ">=8.4"
     },
     "autoload": {
         "psr-4": {
@@ -22,6 +21,7 @@
     "require-dev": {
         "phpunit/phpunit": "^9.5",
         "symfony/panther": "^2.0",
-        "dbrekelmans/bdi": "^1.0"
+        "dbrekelmans/bdi": "^1.0",
+        "symfony/mime": "^7.2"
     }
 }

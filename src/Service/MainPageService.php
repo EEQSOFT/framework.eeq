@@ -26,7 +26,7 @@ class MainPageService
         $ur = $this->rm->getRepository(UserRepository::class);
 
         if ($submit) {
-            $this->mainPageValidator->validate($name, $token);
+            $this->mainPageValidator->validate([$name, $token]);
 
             if ($this->mainPageValidator->isValid()) {
                 $userData = $ur->getCookieLoginUserData($name, '');

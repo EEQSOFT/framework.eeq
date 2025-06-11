@@ -28,7 +28,7 @@ class MainPageValidatorTest extends TestCase
 
     public function testRegularNameParameterIsValid(): void
     {
-        $this->validator->validate('Name', $this->token);
+        $this->validator->validate(['Name', $this->token]);
         $valid = $this->validator->isValid();
 
         $this->assertTrue($valid);
@@ -36,7 +36,7 @@ class MainPageValidatorTest extends TestCase
 
     public function testEmptyNameParameterIsNotValid(): void
     {
-        $this->validator->validate('', $this->token);
+        $this->validator->validate(['', $this->token]);
         $valid = $this->validator->isValid();
 
         $this->assertFalse($valid);
@@ -44,7 +44,7 @@ class MainPageValidatorTest extends TestCase
 
     public function testTooLongNameParameterIsNotValid(): void
     {
-        $this->validator->validate('123456789012345678901', $this->token);
+        $this->validator->validate(['123456789012345678901', $this->token]);
         $valid = $this->validator->isValid();
 
         $this->assertFalse($valid);

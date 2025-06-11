@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use App\Core\Validator;
-
-abstract class Code implements Validator
+class Code
 {
     protected int $code;
 
@@ -28,10 +26,5 @@ abstract class Code implements Validator
     public function isError(): bool
     {
         return ($this->code !== 200) ? true : false;
-    }
-
-    public function isValid(): bool
-    {
-        return ($this->code === 200) ? true : false;
     }
 }

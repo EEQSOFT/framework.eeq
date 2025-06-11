@@ -24,7 +24,8 @@ class Query
             ':' . $search . ',',
             ':' . $search . ' ',
             ':' . $search . '%',
-            ':' . $search . ')'
+            ':' . $search . ')',
+            ':' . $search
         ];
         $replace = addslashes((string) $replace);
         $replace = [
@@ -35,7 +36,8 @@ class Query
             $replace . ',',
             $replace . ' ',
             $replace . '%',
-            $replace . ')'
+            $replace . ')',
+            $replace
         ];
         $subject = $this->query;
 
