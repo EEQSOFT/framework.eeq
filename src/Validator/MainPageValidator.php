@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Validator;
 
-use App\Core\{CsrfToken, Error};
+use App\Core\{CsrfToken, ErrorValidator};
 
-class MainPageValidator extends Error
+class MainPageValidator extends ErrorValidator
 {
     public function __construct(
         protected readonly CsrfToken $csrfToken
@@ -14,8 +14,10 @@ class MainPageValidator extends Error
         parent::__construct();
     }
 
-    public function validate(string $name, string $token): void
+    public function validate(array $array): void
     {
+        list($name, $token) = $array;
+
         if ($name === '') {
             $this->addError(FORM_MAIN_PAGE_NAME_MIN_MESSAGE);
         } elseif (strlen($name) > 20) {

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use App\Core\Validator;
-
-abstract class Error implements Validator
+class Error
 {
     protected ?array $error;
 
@@ -44,10 +42,5 @@ abstract class Error implements Validator
     public function isError(): bool
     {
         return ($this->error !== null) ? true : false;
-    }
-
-    public function isValid(): bool
-    {
-        return ($this->error === null) ? true : false;
     }
 }
