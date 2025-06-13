@@ -16,29 +16,8 @@ class Query
             $replace = 0;
         }
 
-        $search = [
-            ':' . $search . "\r",
-            ':' . $search . "\n",
-            ':' . $search . "'",
-            ':' . $search . '"',
-            ':' . $search . ',',
-            ':' . $search . ' ',
-            ':' . $search . '%',
-            ':' . $search . ')',
-            ':' . $search
-        ];
+        $search = ':' . $search;
         $replace = addslashes((string) $replace);
-        $replace = [
-            $replace . "\r",
-            $replace . "\n",
-            $replace . "'",
-            $replace . '"',
-            $replace . ',',
-            $replace . ' ',
-            $replace . '%',
-            $replace . ')',
-            $replace
-        ];
         $subject = $this->query;
 
         $this->query = str_replace(

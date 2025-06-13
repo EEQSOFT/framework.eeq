@@ -7,13 +7,11 @@ namespace App\Core;
 interface Database
 {
     public function connect(): void;
-    public function close(): void;
-    public function query(string $query): mixed;
-    public function fetchArray(mixed $result): array|null|false;
-    public function numberRows(mixed $result): int;
-    public function affectedRows(): int;
-    public function insertId(): int;
-    public function startTransaction(): bool;
+    public function prepare(string $query): mixed;
+    public function execute(array $array): bool;
+    public function rowCount(): int;
+    public function lastInsertId(): int;
+    public function beginTransaction(): bool;
     public function commit(): bool;
-    public function rollback(): bool;
+    public function rollBack(): bool;
 }

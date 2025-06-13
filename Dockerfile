@@ -2,7 +2,7 @@ FROM php:8.4-apache
 
 RUN a2enmod rewrite
 RUN apt-get update && apt-get install -y cron
-RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+RUN docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable mysqli pdo pdo_mysql
 RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get update

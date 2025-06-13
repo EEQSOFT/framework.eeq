@@ -19,6 +19,9 @@ const ERROR_LOG_FILE = __DIR__ . '/../error.log';
 const CORE_FILE = __DIR__ . '/../inc/core/core.php';
 const AUTOLOAD_FILE = __DIR__ . '/../vendor/autoload.php';
 
+const DEFAULT_DATABASE_CLASS = 'MyPDO';
+const DEFAULT_DATABASE_NAME = 'mysql';
+
 $lang = $_GET['lang'] ?? 'en';
 $lang = ($lang !== '') ? $lang : 'en';
 $lp = ($lang !== 'en') ? '/' . $lang : '';

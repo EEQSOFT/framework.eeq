@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Mysqli' => [
+    'mysql' => [
         'db_host' => 'fwe-mysql',
         'db_port' => 3306,
         'db_user' => 'framework',
