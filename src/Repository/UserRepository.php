@@ -13,17 +13,19 @@ class UserRepository extends Repository
         string $ip,
         string $date
     ): bool {
-        $query = $this->manager->createQuery(
-            "UPDATE `user` u
-            SET u.`user_ip_loged` = ':ip', u.`user_date_loged` = ':date'
-            WHERE u.`user_id` = :user"
-        )
-            ->setParameter('user', $user)
-            ->setParameter('ip', $ip)
-            ->setParameter('date', $date)
-            ->getStrQuery();
+        $this->database->prepare(
+            'UPDATE `user` u
+            SET u.`user_ip_loged` = :ip, u.`user_date_loged` = :date
+            WHERE u.`user_id` = :user'
+        );
 
-        return $this->database->query($query);
+        $parameters = [
+            'user' => $user,
+            'ip' => $ip,
+            'date' => $date
+        ];
+
+        return $this->database->execute($parameters);
     }
 
     public function getCookieLoginUserData(
@@ -32,19 +34,21 @@ class UserRepository extends Repository
     ): array {
         $array = [];
 
-        $query = $this->manager->createQuery(
-            "SELECT u.`user_id`, u.`user_admin`, u.`user_active`,
+        $stmt = $this->database->prepare(
+            'SELECT u.`user_id`, u.`user_admin`, u.`user_active`,
                 u.`user_login` FROM `user` u
-            WHERE u.`user_login_canonical` = ':login_canonical'
-                AND u.`user_password` = ':password'"
-        )
-            ->setParameter('login_canonical', strtolower($login))
-            ->setParameter('password', $password)
-            ->getStrQuery();
+            WHERE u.`user_login_canonical` = :login_canonical
+                AND u.`user_password` = :password'
+        );
 
-        $this->database->query($query);
+        $parameters = [
+            'login_canonical' => strtolower($login),
+            'password' => $password
+        ];
 
-        if (is_array($row = $this->database->fetchArray())) {
+        $this->database->execute($parameters);
+
+        foreach ($stmt as $row) {
             $array['user_id'] = (int) $row['user_id'];
             $array['user_admin'] = (bool) $row['user_admin'];
             $array['user_active'] = (bool) $row['user_active'];

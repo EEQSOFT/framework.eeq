@@ -41,10 +41,10 @@ abstract class Controller
         $this->csrfToken = new CsrfToken();
     }
 
-    public function setManager(string $name = 'Mysqli'): void
+    public function setManager(string $name = DEFAULT_DATABASE_NAME): void
     {
         if (!isset($this->manager[$name])) {
-            $class = 'App\\Core\\' . $name;
+            $class = 'App\\Core\\' . DEFAULT_DATABASE_CLASS;
 
             $this->database[$name] = new $class($name);
             $this->manager[$name] = new Manager($this->database[$name]);
@@ -53,7 +53,7 @@ abstract class Controller
         }
     }
 
-    public function getManager(string $name = 'Mysqli'): Manager
+    public function getManager(string $name = DEFAULT_DATABASE_NAME): Manager
     {
         $this->setManager($name);
 
