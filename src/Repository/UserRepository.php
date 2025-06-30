@@ -19,13 +19,13 @@ class UserRepository extends Repository
             WHERE u.`user_id` = :user'
         );
 
-        $parameters = [
+        $params = [
             'user' => $user,
             'ip' => $ip,
             'date' => $date
         ];
 
-        return $this->database->execute($parameters);
+        return $this->database->execute($params);
     }
 
     public function getCookieLoginUserData(
@@ -41,12 +41,12 @@ class UserRepository extends Repository
                 AND u.`user_password` = :password'
         );
 
-        $parameters = [
+        $params = [
             'login_canonical' => strtolower($login),
             'password' => $password
         ];
 
-        $this->database->execute($parameters);
+        $this->database->execute($params);
 
         foreach ($stmt as $row) {
             $array['user_id'] = (int) $row['user_id'];
