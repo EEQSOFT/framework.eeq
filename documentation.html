@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+
+        <title>PHP Framework from EEQSOFT Documentation</title>
+
+        <style>
+            body {
+                margin: 40px 20px 40px 20px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            p {
+                text-align: justify;
+            }
+
+            blockquote {
+                padding: 10px;
+                border-left: 4px solid #aaa;
+                background: #eee;
+                font-style: italic;
+            }
+
+            .container {
+                max-width: 770px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            @media (min-width: 2500px) {
+                body {
+                    margin: 80px 40px 80px 40px;
+                    font-size: 28px;
+                }
+
+                h1 {
+                    margin: 40px 0 40px 0;
+                    font-size: 72px;
+                }
+
+                h2 {
+                    margin: 40px 0 40px 0;
+                    font-size: 56px;
+                }
+
+                h3 {
+                    margin: 40px 0 40px 0;
+                    font-size: 38px;
+                }
+
+                p {
+                    margin-top: 30px;
+                    margin-bottom: 30px;
+                }
+
+                blockquote {
+                    padding: 20px;
+                    border-left: 8px solid #aaa;
+                }
+
+                .container {
+                    width: 1540px;
+                    max-width: 1540px;
+                    margin-bottom: 40px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>PHP Framework from EEQSOFT Documentation</h1>
+
+            <span id="introduction"></span>
+
+            <h2>Introduction</h2>
+
+            <p>
+                This application is a PHP framework.
+                It uses the MVC design pattern.
+                All you need is a personal computer with XAMPP or Docker Desktop.
+                The application requires PHP and, for example, MySQL.
+            </p>
+
+            <h3>More Information</h3>
+
+            <ol>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#usage">Usage</a></li>
+                <li><a href="#development">Development</a></li>
+                <li><a href="#upgrade">Upgrade</a></li>
+                <li><a href="#change-logs">Change Logs</a></li>
+            </ol>
+
+            <span id="installation"></span>
+
+            <h2>1. Installation</h2>
+
+            <h3>Server Requirements</h3>
+
+            <p>
+                This application requires at least <strong>PHP 8.4</strong> and <strong>MySQL 5.x-8.x</strong>.
+                Please ensure your hosting service or personal computer meets these requirements.
+            </p>
+
+            <h3>Hosting Configuration</h3>
+
+            <p>
+                Set the root directory of the php files to "public".
+                Set the path for your hosting:
+            </p>
+
+            <blockquote>&lt;path to project&gt;/public</blockquote>
+
+            <p>
+                Create a database with full user permissions.
+                Use the database name as in your config:
+            </p>
+
+            <blockquote>for example: "framework"</blockquote>
+
+            <h3>Application Configuration</h3>
+
+            <p>
+                Change the settings in the "database.php" file.
+                Set as in the "database.php.dist" file (check "config"):
+            </p>
+
+            <blockquote>
+                'db_host' => 'localhost'<br>
+                'db_port' => 3306<br>
+                'db_user' => '&lt;user&gt;'<br>
+                'db_password' => '&lt;password&gt;'<br>
+                'db_database' => 'framework'
+            </blockquote>
+
+            <p>
+                If necessary, set these permissions.
+                Change the permissions of the "settings.php" file to 666:
+            </p>
+
+            <blockquote>&lt;path to project&gt;/config/settings.php</blockquote>
+
+            <h3>Application Installation</h3>
+
+            <p>
+                If you want to use a database, use the SQL commands from the "framework.sql" file for your database:
+            </p>
+
+            <blockquote>&lt;path to project&gt;/data/framework.sql</blockquote>
+
+            <p>
+                Run this web application in your browser.
+                Open the url below:
+            </p>
+
+            <blockquote>https://&lt;domain.com&gt;</blockquote>
+
+            <span id="usage"></span>
+
+            <h2>2. Usage</h2>
+
+            <p>
+                Below you can find the <strong>Directory Structure</strong> of this framework.
+                Let's see what files the directories contain.
+            </p>
+
+            <h3>Config</h3>
+
+            <p>The "config" directory contains all the configuration files:</p>
+
+            <blockquote>
+                &lt;path to project&gt;/config/actions.php<br>
+                &lt;path to project&gt;/config/config.php<br>
+                &lt;path to project&gt;/config/database.php<br>
+                &lt;path to project&gt;/config/database.php.dist<br>
+                &lt;path to project&gt;/config/redirects.php<br>
+                &lt;path to project&gt;/config/settings.php<br>
+                &lt;path to project&gt;/config/settings.php.dist
+            </blockquote>
+
+            <h3>Data</h3>
+
+            <p>The "data" directory contains the "framework.sql" file with an example structure of database tables:</p>
+
+            <blockquote>&lt;path to project&gt;/data/framework.sql</blockquote>
+
+            <h3>Include</h3>
+
+            <p>The "inc" directory contains included files that are not classes:</p>
+
+            <blockquote>
+                &lt;path to project&gt;/inc/core/core.php<br>
+                &lt;path to project&gt;/inc/core/data.php<br>
+                &lt;path to project&gt;/inc/public/error.php<br>
+                &lt;path to project&gt;/inc/public/index.php<br>
+                &lt;path to project&gt;/inc/public/info.php
+            </blockquote>
+
+            <h3>Public</h3>
+
+            <p>The "public" directory contains files displayed by the browser to users:</p>
+
+            <blockquote>
+                &lt;path to project&gt;/public/css/default.css<br>
+                &lt;path to project&gt;/public/css/rwd.css<br>
+                &lt;path to project&gt;/public/images/favicon.ico<br>
+                &lt;path to project&gt;/public/js/default.js<br>
+                &lt;path to project&gt;/public/.htaccess<br>
+                &lt;path to project&gt;/public/error.php<br>
+                &lt;path to project&gt;/public/index.php<br>
+                &lt;path to project&gt;/public/robots.txt
+            </blockquote>
+
+            <h3>Source</h3>
+
+            <p>The "src" directory contains source files that are classes:</p>
+
+            <blockquote>
+                &lt;path to project&gt;/src/Controller/MainPageController.php<br>
+                &lt;path to project&gt;/src/Core/*<br>
+                &lt;path to project&gt;/src/Repository/UserRepository.php<br>
+                &lt;path to project&gt;/src/Service/MainPageService.php<br>
+                &lt;path to project&gt;/src/Validator/MainPageValidator.php<br>
+                &lt;path to project&gt;/src/autoload.php
+            </blockquote>
+
+            <p>
+                The "src/Core/*" directory contains all the core files of this framework.
+                Add or edit the contents of the "Controller," "Repository," "Service," and "Validator" directories.
+                Use the "autoload.php" file in "config.php" (check "config") if you don't plan to use <strong>Composer</strong>.
+            </p>
+
+            <h3>Templates</h3>
+
+            <p>
+                The "templates" directory contains all the design files for this framework.
+                You can add multiple layouts and additional pages:
+            </p>
+
+            <blockquote>
+                &lt;path to project&gt;/templates/layout/main/*.php<br>
+                &lt;path to project&gt;/templates/layout/*<br>
+                &lt;path to project&gt;/templates/main_page/main_page.php<br>
+                &lt;path to project&gt;/templates/main_page/name_info.php
+            </blockquote>
+
+            <h3>Tests</h3>
+
+            <p>
+                The "tests" directory contains the framework's test files.
+                You can modify its contents:
+            </p>
+
+            <blockquote>
+                &lt;path to project&gt;/tests/Browser/MainPageBrowserTest.php<br>
+                &lt;path to project&gt;/tests/Repository/UserRepositoryTest.php<br>
+                &lt;path to project&gt;/tests/Validator/MainPageValidatorTest.php<br>
+                &lt;path to project&gt;/tests/bootstrap.php
+            </blockquote>
+
+            <h3>Translations</h3>
+
+            <p>The "translations" directory contains all translation files:</p>
+
+            <blockquote>
+                &lt;path to project&gt;/translations/languages.php<br>
+                &lt;path to project&gt;/translations/languages.en.php<br>
+                &lt;path to project&gt;/translations/languages.pl.php<br>
+                &lt;path to project&gt;/translations/messages.en.php<br>
+                &lt;path to project&gt;/translations/messages.pl.php<br>
+                &lt;path to project&gt;/translations/validators.en.php<br>
+                &lt;path to project&gt;/translations/validators.pl.php
+            </blockquote>
+
+            <h3>Vendor</h3>
+
+            <p>The "vendor" directory contains all libraries added by <strong>Composer</strong>:</p>
+
+            <blockquote>
+                &lt;path to project&gt;/vendor/*<br>
+                &lt;path to project&gt;/vendor/autoload.php
+            </blockquote>
+
+            <span id="development"></span>
+
+            <h2>3. Development</h2>
+
+            <p>
+                The easiest way to develop this software is to use <strong>Docker Desktop</strong>.
+                To do so, follow the instructions below.
+            </p>
+
+            <p>Go to the application directory:</p>
+
+            <blockquote>cd &lt;path to project&gt;</blockquote>
+
+            <p>Start the application stack defined in "docker-compose.yml":</p>
+
+            <blockquote>docker-compose up -d</blockquote>
+
+            <p>Set the permissions and access for the "fwe-php-apache" container:</p>
+
+            <blockquote>
+                docker exec -it fwe-php-apache bash<br>
+                cd /var/www<br>
+                ls -l<br>
+                chmod 777 /var/www/html<br>
+                chown -R www-data:www-data /var/www/html<br>
+                ls -l<br>
+                exit
+            </blockquote>
+
+            <p>Use <strong>Composer</strong> to install the needed dependencies from the "composer.json" file:</p>
+
+            <blockquote>
+                docker exec -it fwe-php-apache bash<br>
+                cd /var/www/html<br>
+                composer install
+            </blockquote>
+
+            <p>Run the <strong>PHPUnit Tests</strong>:</p>
+
+            <blockquote>docker exec -it fwe-php-apache vendor/bin/phpunit tests</blockquote>
+
+            <p>Open this web application and/or <strong>phpMyAdmin</strong> in your browser:</p>
+
+            <blockquote>
+                http://localhost:8000<br>
+                http://localhost:8001
+            </blockquote>
+
+            <p>Stop the application stack:</p>
+
+            <blockquote>docker-compose down</blockquote>
+
+            <span id="upgrade"></span>
+
+            <h2>4. Upgrade</h2>
+
+            <p>
+                These PHP Framework core classes are located in the "src/Core/*" directory.
+                You'll need to copy the new ones to the updated project and fix any inconsistencies in other application files.
+            </p>
+
+            <span id="change-logs"></span>
+
+            <h2>5. Change Logs</h2>
+
+            <h3>v0.3.0 - 30 June 2025</h3>
+
+            <p>
+                - Add: MyPDO class added<br>
+                - Update: Core classes changed<br>
+                - Fix: Database security improvements
+            </p>
+
+            <h3>v0.2.0 - 11 June 2025</h3>
+
+            <p>
+                - Update: Many classes changed<br>
+                - Fix: Many security improvements
+            </p>
+
+            <h3>v0.1.0 - 20 February 2025</h3>
+
+            <p>- Initial Release</p>
+        </div>
+    </body>
+</html>

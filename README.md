@@ -54,13 +54,13 @@ https://<domain.com>
 cd <path to project>
 ```
 
-### 2. Start the application stack defined in docker-compose.yml
+### 2. Start the application stack defined in "docker-compose.yml"
 
 ```
 docker-compose up -d
 ```
 
-### 3. Set the permissions and access for the fwe-php-apache container
+### 3. Set the permissions and access for the "fwe-php-apache" container
 
 ```
 docker exec -it fwe-php-apache bash
@@ -87,7 +87,7 @@ docker-compose down
 
 ## Composer
 
-### 1. Install the needed dependencies from the composer.json file
+### 1. Install the needed dependencies from the "composer.json" file
 
 ```
 docker exec -it fwe-php-apache bash
