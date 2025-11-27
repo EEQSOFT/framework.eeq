@@ -58,7 +58,7 @@ class MyPDO implements Database
         return $this->stmt;
     }
 
-    public function execute(array $array): bool
+    public function execute(array $array = []): bool
     {
         return $this->stmt->execute($array);
     }
@@ -75,16 +75,16 @@ class MyPDO implements Database
 
     public function beginTransaction(): bool
     {
-        $this->pdo->beginTransaction();
+        return $this->pdo->beginTransaction();
     }
 
     public function commit(): bool
     {
-        $this->pdo->commit();
+        return $this->pdo->commit();
     }
 
     public function rollBack(): bool
     {
-        $this->pdo->rollBack();
+        return $this->pdo->rollBack();
     }
 }
