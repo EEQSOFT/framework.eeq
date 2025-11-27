@@ -36,6 +36,17 @@
                 overflow-x: auto;
             }
 
+            code {
+                white-space: pre;
+            }
+
+            .code {
+                padding: 0 15px;
+                border-radius: 5px;
+                background: #eee;
+                overflow-x: auto;
+            }
+
             .container {
                 max-width: 770px;
                 margin-left: auto;
@@ -196,6 +207,43 @@
                 &lt;path to project&gt;/config/settings.php.dist
             </blockquote>
 
+            <h4>actions.php</h4>
+
+            <div class="code"><code>
+return [
+    'main_page' => [
+        'role' => 'none',
+        'option' => 'page',
+        'name' => 'MainPage'
+    ]
+];
+            </code></div>
+
+            <h4>database.php</h4>
+
+            <div class="code"><code>
+return [
+    'mysql' => [
+        'db_host' => 'fwe-mysql',
+        'db_port' => 3306,
+        'db_user' => 'framework',
+        'db_password' => '1234567890',
+        'db_database' => 'framework',
+        'db_names' => 'utf8mb4',
+        'db_collate' => 'utf8mb4_unicode_ci'
+    ]
+];
+            </code></div>
+
+            <h4>settings.php</h4>
+
+            <div class="code"><code>
+return [
+    'app_version' => '0.4.0',
+    'admin_email' => 'contact@framework.eeq'
+];
+            </code></div>            
+
             <h3>Data</h3>
 
             <p>The "data" directory contains the "framework.sql" file with an example structure of database tables:</p>
@@ -229,6 +277,40 @@
                 &lt;path to project&gt;/public/robots.txt
             </blockquote>
 
+            <h4>.htaccess</h4>
+
+            <div class="code"><code>
+ErrorDocument 403 /error.php?code=403
+ErrorDocument 404 /error.php?code=404
+ErrorDocument 500 /error.php?code=500
+
+DirectoryIndex index.html index.php /error.php?code=403
+AddHandler application/x-httpd-ea-php84 .php
+
+# php_flag register_globals off
+# php_value default_charset utf-8
+# php_value date.timezone UTC
+# php_value max_execution_time 180
+# php_value memory_limit 1024M
+# php_value post_max_size 200M
+# php_value upload_max_filesize 100M
+
+RewriteEngine on
+RewriteBase /
+
+# RewriteCond %{HTTPS} !^on$
+# RewriteCond %{HTTP_HOST} !^127\.0\.0\.9$
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+# RewriteCond %{HTTP_HOST} !^framework\.eeq$
+# RewriteCond %{HTTP_HOST} !^127\.0\.0\.9$
+# RewriteRule ^(.*)$ https://framework.eeq/$1 [R=301,L]
+# RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?framework\.eeq/ [NC]
+# RewriteCond %{HTTP_REFERER} !^http(s)?://127\.0\.0\.9/ [NC]
+# RewriteRule \.(jpeg|jpg|gif|png|bmp)$ - [NC,F,L]
+
+RewriteRule ^((pl)/)?$ /index.php?action=main_page&lang=$2 [L]
+            </code></div>
+
             <h3>Source</h3>
 
             <p>The "src" directory contains source files that are classes:</p>
@@ -247,6 +329,193 @@
                 Add or edit the contents of the "Controller," "Repository," "Service," and "Validator" directories.
                 Use the "autoload.php" file in "config.php" (check "config") if you don't plan to use <strong>Composer</strong>.
             </p>
+
+            <h4>MainPageController.php</h4>
+
+            <div class="code"><code>
+declare(strict_types=1);
+
+namespace App\Controller;
+
+use App\Core\Controller;
+use App\Service\MainPageService;
+use App\Validator\MainPageValidator;
+
+class MainPageController extends Controller
+{
+    public function mainPageAction(array $request): array
+    {
+        $mainPageValidator = new MainPageValidator($this->csrfToken);
+
+        $mainPageService = new MainPageService(
+            $this->getManager(),
+            $this->html,
+            $this->csrfToken,
+            $mainPageValidator
+        );
+
+        return $mainPageService->mainPageAction(
+            (string) ($request['lang'] ?? ''),
+            (string) ($request['name'] ?? ''),
+            (bool) ($request['submit'] ?? false),
+            (string) ($request['token'] ?? '')
+        );
+    }
+}
+            </code></div>
+
+            <h4>UserRepository.php</h4>
+
+            <div class="code"><code>
+declare(strict_types=1);
+
+namespace App\Repository;
+
+use App\Core\Repository;
+
+class UserRepository extends Repository
+{
+    public function setCookieLoginUserLoged(
+        int $user,
+        string $ip,
+        string $date
+    ): bool {
+        $this->manager->prepare(
+            'UPDATE `user` u
+            SET u.`user_ip_loged` = :ip, u.`user_date_loged` = :date
+            WHERE u.`user_id` = :user'
+        )
+            ->setParameter('user', $user)
+            ->setParameter('ip', $ip)
+            ->setParameter('date', $date)
+            ->getResult();
+
+        return $this->manager->execute();
+    }
+
+    public function getCookieLoginUserData(
+        string $login,
+        string $password
+    ): array {
+        $array = [];
+
+        $stmt = $this->manager->prepare(
+            'SELECT u.`user_id`, u.`user_admin`, u.`user_active`,
+                u.`user_login` FROM `user` u
+            WHERE u.`user_login_canonical` = :login_canonical
+                AND u.`user_password` = :password'
+        )
+            ->setParameter('login_canonical', strtolower($login))
+            ->setParameter('password', $password)
+            ->getResult();
+
+        $this->manager->execute();
+
+        foreach ($stmt as $row) {
+            $array['user_id'] = (int) $row['user_id'];
+            $array['user_admin'] = (bool) $row['user_admin'];
+            $array['user_active'] = (bool) $row['user_active'];
+            $array['user_login'] = $row['user_login'];
+        }
+
+        return $array;
+    }
+}
+            </code></div>
+
+            <h4>MainPageService.php</h4>
+
+            <div class="code"><code>
+declare(strict_types=1);
+
+namespace App\Service;
+
+use App\Core\{CsrfToken, Html, Manager};
+use App\Repository\UserRepository;
+use App\Validator\MainPageValidator;
+
+class MainPageService
+{
+    public function __construct(
+        protected readonly Manager $rm,
+        protected readonly Html $html,
+        protected readonly CsrfToken $csrfToken,
+        protected readonly MainPageValidator $mainPageValidator
+    ) {}
+
+    public function mainPageAction(
+        string $lang,
+        string $name,
+        bool $submit,
+        string $token
+    ): array {
+        $ur = $this->rm->getRepository(UserRepository::class);
+
+        if ($submit) {
+            $this->mainPageValidator->validate([$name, $token]);
+
+            if ($this->mainPageValidator->isValid()) {
+                $userData = $ur->getCookieLoginUserData($name, '');
+
+                return [
+                    'content' => 'main_page/name_info.php',
+                    'active_menu' => 'main_page',
+                    'title' => PAGE_INFO_TITLE,
+                    'language' => LANGUAGE_NAME[LANGUAGE_ID[$lang]],
+                    'name' => $userData['user_login'] ?? $name
+                ];
+            }
+        }
+
+        return [
+            'content' => 'main_page/main_page.php',
+            'active_menu' => 'main_page',
+            'title' => PAGE_MAIN_PAGE_TITLE,
+            'desc' => WEBSITE_DESC,
+            'keywords' => WEBSITE_KEYWORDS,
+            'error' => $this->html->prepareError(
+                $this->mainPageValidator->getError()
+            ),
+            'name' => $name,
+            'token' => $this->csrfToken->generateToken()
+        ];
+    }
+}
+            </code></div>
+
+            <h4>MainPageValidator.php</h4>
+
+            <div class="code"><code>
+declare(strict_types=1);
+
+namespace App\Validator;
+
+use App\Core\{CsrfToken, ErrorValidator};
+
+class MainPageValidator extends ErrorValidator
+{
+    public function __construct(
+        protected readonly CsrfToken $csrfToken
+    ) {
+        parent::__construct();
+    }
+
+    public function validate(array $array): void
+    {
+        list($name, $token) = $array;
+
+        if ($name === '') {
+            $this->addError(FORM_MAIN_PAGE_NAME_MIN_MESSAGE);
+        } elseif (strlen($name) > 20) {
+            $this->addError(FORM_MAIN_PAGE_NAME_MAX_MESSAGE);
+        }
+
+        if ($token !== $this->csrfToken->receiveToken()) {
+            $this->addError(FORM_TOKEN_INVALID);
+        }
+    }
+}
+            </code></div>
 
             <h3>Templates</h3>
 
@@ -364,6 +633,13 @@
 
             <h2>5. Change Logs</h2>
 
+            <h3>v0.4.0 - 26 November 2025</h3>
+
+            <p>
+                - Update: Core classes changed<br>
+                - Fix: MyPDO class fixed
+            </p>
+
             <h3>v0.3.0 - 30 June 2025</h3>
 
             <p>
@@ -381,7 +657,7 @@
 
             <h3>v0.1.0 - 20 February 2025</h3>
 
-            <p>- Initial Release</p>
+            <p>- Initial release</p>
         </div>
     </body>
 </html>
