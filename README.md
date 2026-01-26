@@ -105,6 +105,6 @@ docker exec -it fwe-php-apache vendor/bin/phpunit tests
 
 ## Information
 
-Copyright (c) 2024 EEQSOFT
+Copyright (c) 2024-2026 EEQSOFT
 
-https://phpframework.eeqsoft.com
+https://www.eeqsoft.com/php-framework
