@@ -1,4 +1,4 @@
-# PHP Framework from EEQSOFT
+# EEQ Framework from EEQSOFT
 
 ## Setup/Installation
 
@@ -107,4 +107,4 @@ docker exec -it fwe-php-apache vendor/bin/phpunit tests
 
 Copyright (c) 2024-2026 EEQSOFT
 
-https://www.eeqsoft.com/php-framework
+https://www.eeqsoft.com
