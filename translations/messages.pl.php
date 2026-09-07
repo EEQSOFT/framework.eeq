@@ -10,7 +10,7 @@ const MENU_MAIN_PAGE = 'Główna';
 const PAGE_INFO_TITLE = 'Informacja';
 const PAGE_INFO_TEXT = 'Tekst informacji:';
 
-const PAGE_MAIN_PAGE_TITLE = 'PHP Framework od EEQSOFT';
+const PAGE_MAIN_PAGE_TITLE = 'EEQ Framework od EEQSOFT';
 const PAGE_MAIN_PAGE_INFO = 'Witamy w Framework.eeq! Przykłady użycia frameworka można znaleźć tutaj:';
 const PAGE_MAIN_PAGE_WELCOME = 'Witamy';
 const PAGE_MAIN_PAGE_FORM = 'Przykładowy formularz:';
