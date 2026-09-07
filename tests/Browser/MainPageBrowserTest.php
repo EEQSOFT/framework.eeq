@@ -41,7 +41,7 @@ class MainPageBrowserTest extends PantherTestCase
         $response = $this->browser->getResponse();
 
         $this->assertStringContainsString(
-            '<title>PHP Framework from EEQSOFT</title>',
+            '<title>EEQ Framework from EEQSOFT</title>',
             (string) $response
         );
     }
@@ -52,7 +52,7 @@ class MainPageBrowserTest extends PantherTestCase
         $response = $this->browser->getResponse();
 
         $this->assertStringContainsString(
-            '<title>PHP Framework od EEQSOFT</title>',
+            '<title>EEQ Framework od EEQSOFT</title>',
             (string) $response
         );
     }
