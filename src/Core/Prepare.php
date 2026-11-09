@@ -21,10 +21,6 @@ class Prepare
 
     public function setParameter(string $search, mixed $replace): self
     {
-        if (is_bool($replace)) {
-            $replace = (int) $replace;
-        }
-
         $this->params[$search] = $replace;
 
         return $this;
