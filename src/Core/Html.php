@@ -9,19 +9,21 @@ class Html
     public function prepareError(
         ?array $array,
         string $before = '',
-        string $after = '<br>'
+        string $after = '<br>',
+        string $beforeAll = '',
+        string $afterAll = ''
     ): ?string {
         if (!is_array($array)) {
             return null;
         }
 
-        $error = '';
+        $error = $beforeAll;
 
         foreach ($array as $key => $value) {
             $error .= $before . htmlspecialchars($value) . $after;
         }
 
-        $error .= "\n";
+        $error .= $afterAll . "\n";
 
         return $error;
     }
@@ -31,13 +33,18 @@ class Html
         int $level,
         int $listLimit,
         int $count,
-        int $levelLimit
+        int $levelLimit,
+        string $before = '',
+        string $after = '',
+        string $beforeActive = '[',
+        string $afterActive = ']',
+        string $beforeAll = '',
+        string $afterAll = ''
     ): ?string {
         if ($count <= $listLimit) {
             return null;
         }
 
-        $pageNavigator = '';
         $minLevel = 1;
         $maxLevel = number_format($count / $listLimit, 0, '.', '');
         $number = number_format($count / $listLimit, 2, '.', '');
@@ -50,26 +57,31 @@ class Html
         $nextLevel = $level + 1;
         $url = htmlspecialchars($url);
 
+        $pageNavigator = $beforeAll;
+
         if ($maxLevel > $levelLimit) {
-            $pageNavigator .= ($level > $minLevel) ? '<a href="' . $url
-                . $minLevel . '">...</a>' : '';
+            $pageNavigator .= ($level > $minLevel) ? $before . '<a href="'
+                . $url . $minLevel . '">...</a>' . $after : '';
         }
 
-        $pageNavigator .= ($level > $minLevel) ? '<a href="' . $url
-            . $previousLevel . '">&nbsp;&laquo&nbsp;</a>' : '';
+        $pageNavigator .= ($level > $minLevel) ? $before . '<a href="'
+            . $url . $previousLevel . '">&nbsp;&laquo&nbsp;</a>' . $after : '';
 
         for ($i = $fromLevel; $i <= $toLevel; $i++) {
-            $pageNavigator .= ($i !== $level) ? '<a href="' . $url
-                . $i . '">&nbsp;' . $i . '&nbsp;</a>' : '[' . $i . ']';
+            $pageNavigator .= ($i !== $level) ? $before . '<a href="' . $url
+                . $i . '">&nbsp;' . $i . '&nbsp;</a>' . $after : $beforeActive
+                . $i . $afterActive;
         }
 
-        $pageNavigator .= ($level < $maxLevel) ? '<a href="' . $url
-            . $nextLevel . '">&nbsp;&raquo;&nbsp;</a>' : '';
+        $pageNavigator .= ($level < $maxLevel) ? $before . '<a href="'
+            . $url . $nextLevel . '">&nbsp;&raquo;&nbsp;</a>' . $after : '';
 
         if ($maxLevel > $levelLimit) {
-            $pageNavigator .= ($level < $maxLevel) ? '<a href="' . $url
-                . $maxLevel . '">...</a>' : '';
+            $pageNavigator .= ($level < $maxLevel) ? $before . '<a href="'
+                . $url . $maxLevel . '">...</a>' . $after : '';
         }
+
+        $pageNavigator .= $afterAll . "\n";
 
         return $pageNavigator;
     }

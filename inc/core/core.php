@@ -4,7 +4,7 @@ if (!file_exists(dirname(__DIR__, 2) . '/translations/messages.' . $lang . '.php
     $title = 'Information';
     $message = 'Unsupported language';
 
-    require dirname(__DIR__, 2) . '/inc/public/info.php';
+    require INFO_FILE;
 
     exit;
 }

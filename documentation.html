@@ -13,7 +13,7 @@
 
         <style>
             body {
-                margin: 40px 20px 40px 20px;
+                margin: 40px 20px;
                 font-family: Arial, Helvetica, sans-serif;
             }
 
@@ -40,61 +40,21 @@
                 overflow-x: auto;
             }
 
-            code {
-                white-space: pre;
-            }
-
-            .code {
+            pre {
                 padding: 0 15px;
                 border-radius: 5px;
                 background: #eee;
                 overflow-x: auto;
             }
 
+            code {
+                white-space: pre;
+            }
+
             .container {
                 max-width: 770px;
                 margin-left: auto;
                 margin-right: auto;
-            }
-
-            @media (min-width: 2500px) {
-                body {
-                    margin: 80px 40px 80px 40px;
-                    font-size: 32px;
-                }
-
-                h1 {
-                    margin: 40px 0 40px 0;
-                    font-size: 72px;
-                }
-
-                h2 {
-                    margin: 40px 0 40px 0;
-                    font-size: 56px;
-                }
-
-                h3 {
-                    margin: 40px 0 40px 0;
-                    font-size: 38px;
-                }
-
-                p {
-                    margin-top: 30px;
-                    margin-bottom: 30px;
-                    line-height: 36px;
-                }
-
-                blockquote {
-                    margin-left: 40px;
-                    padding: 20px;
-                    border-left: 8px solid #aaa;
-                }
-
-                .container {
-                    width: 1540px;
-                    max-width: 1540px;
-                    margin-bottom: 40px;
-                }
             }
         </style>
     </head>
@@ -182,6 +142,13 @@
             <blockquote>&lt;path to project&gt;/data/framework.sql</blockquote>
 
             <p>
+                You can install the application by running the "install.php" file.
+                Open the url below in your browser:
+            </p>
+
+            <blockquote>https://&lt;domain.com&gt;/install.php</blockquote>
+
+            <p>
                 Run this web application in your browser.
                 Open the url below:
             </p>
@@ -213,7 +180,7 @@
 
             <h4>actions.php</h4>
 
-            <div class="code"><code>
+            <pre><code>
 return [
     'main_page' => [
         'role' => 'none',
@@ -221,11 +188,11 @@ return [
         'name' => 'MainPage'
     ]
 ];
-            </code></div>
+            </code></pre>
 
             <h4>database.php</h4>
 
-            <div class="code"><code>
+            <pre><code>
 return [
     'mysql' => [
         'db_host' => 'fwe-mysql',
@@ -237,16 +204,18 @@ return [
         'db_collate' => 'utf8mb4_unicode_ci'
     ]
 ];
-            </code></div>
+            </code></pre>
 
             <h4>settings.php</h4>
 
-            <div class="code"><code>
+            <pre><code>
 return [
-    'app_version' => '0.4.0',
+    'app_version' => '1.0.0',
+    'app_installed' => false,
+    'app_registered' => false,
     'admin_email' => 'contact@framework.eeq'
 ];
-            </code></div>            
+            </code></pre>            
 
             <h3>Data</h3>
 
@@ -261,9 +230,12 @@ return [
             <blockquote>
                 &lt;path to project&gt;/inc/core/core.php<br>
                 &lt;path to project&gt;/inc/core/data.php<br>
+                &lt;path to project&gt;/inc/data/install.php<br>
+                &lt;path to project&gt;/inc/data/update.php<br>
                 &lt;path to project&gt;/inc/public/error.php<br>
                 &lt;path to project&gt;/inc/public/index.php<br>
-                &lt;path to project&gt;/inc/public/info.php
+                &lt;path to project&gt;/inc/public/info.php<br>
+                &lt;path to project&gt;/inc/public/install.php
             </blockquote>
 
             <h3>Public</h3>
@@ -278,12 +250,13 @@ return [
                 &lt;path to project&gt;/public/.htaccess<br>
                 &lt;path to project&gt;/public/error.php<br>
                 &lt;path to project&gt;/public/index.php<br>
+                &lt;path to project&gt;/public/install.php<br>
                 &lt;path to project&gt;/public/robots.txt
             </blockquote>
 
             <h4>.htaccess</h4>
 
-            <div class="code"><code>
+            <pre><code>
 ErrorDocument 403 /error.php?code=403
 ErrorDocument 404 /error.php?code=404
 ErrorDocument 500 /error.php?code=500
@@ -313,7 +286,7 @@ RewriteBase /
 # RewriteRule \.(jpeg|jpg|gif|png|bmp)$ - [NC,F,L]
 
 RewriteRule ^((pl)/)?$ /index.php?action=main_page&lang=$2 [L]
-            </code></div>
+            </code></pre>
 
             <h3>Source</h3>
 
@@ -322,6 +295,7 @@ RewriteRule ^((pl)/)?$ /index.php?action=main_page&lang=$2 [L]
             <blockquote>
                 &lt;path to project&gt;/src/Controller/MainPageController.php<br>
                 &lt;path to project&gt;/src/Core/*<br>
+                &lt;path to project&gt;/src/Repository/SettingsRepository.php<br>
                 &lt;path to project&gt;/src/Repository/UserRepository.php<br>
                 &lt;path to project&gt;/src/Service/MainPageService.php<br>
                 &lt;path to project&gt;/src/Validator/MainPageValidator.php<br>
@@ -336,7 +310,7 @@ RewriteRule ^((pl)/)?$ /index.php?action=main_page&lang=$2 [L]
 
             <h4>MainPageController.php</h4>
 
-            <div class="code"><code>
+            <pre><code>
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -366,11 +340,65 @@ class MainPageController extends Controller
         );
     }
 }
-            </code></div>
+            </code></pre>
+
+            <h4>SettingsRepository.php</h4>
+
+            <pre><code>
+declare(strict_types=1);
+
+namespace App\Repository;
+
+use App\Core\Repository;
+
+class SettingsRepository extends Repository
+{
+    public function setSettingsVersion(string $version): bool
+    {
+        $this->manager->prepare(
+            'UPDATE `settings` s SET s.`settings_version` = :version'
+        )
+            ->setParameter('version', $version)
+            ->getResult();
+
+        return $this->manager->execute();
+    }
+
+    public function setSettingsRegistered(bool $registered): bool
+    {
+        $this->manager->prepare(
+            'UPDATE `settings` s SET s.`settings_registered` = :registered'
+        )
+            ->setParameter('registered', (int) $registered)
+            ->getResult();
+
+        return $this->manager->execute();
+    }
+
+    public function getSettingsData(): array
+    {
+        $array = [];
+
+        $stmt = $this->manager->prepare(
+            'SELECT * FROM `settings`'
+        )->getResult();
+
+        $this->manager->execute();
+
+        foreach ($stmt as $row) {
+            $array['settings_version'] = $row['settings_version'];
+            $array['settings_installed'] = (bool) $row['settings_installed'];
+            $array['settings_registered'] = (bool) $row['settings_registered'];
+        }
+
+        return $array;
+    }
+}
+            </code></pre>
 
             <h4>UserRepository.php</h4>
 
-            <div class="code"><code>
+            <pre><code>
 declare(strict_types=1);
 
 namespace App\Repository;
@@ -425,11 +453,11 @@ class UserRepository extends Repository
         return $array;
     }
 }
-            </code></div>
+            </code></pre>
 
             <h4>MainPageService.php</h4>
 
-            <div class="code"><code>
+            <pre><code>
 declare(strict_types=1);
 
 namespace App\Service;
@@ -485,11 +513,11 @@ class MainPageService
         ];
     }
 }
-            </code></div>
+            </code></pre>
 
             <h4>MainPageValidator.php</h4>
 
-            <div class="code"><code>
+            <pre><code>
 declare(strict_types=1);
 
 namespace App\Validator;
@@ -519,7 +547,7 @@ class MainPageValidator extends ErrorValidator
         }
     }
 }
-            </code></div>
+            </code></pre>
 
             <h3>Templates</h3>
 
@@ -544,6 +572,7 @@ class MainPageValidator extends ErrorValidator
 
             <blockquote>
                 &lt;path to project&gt;/tests/Browser/MainPageBrowserTest.php<br>
+                &lt;path to project&gt;/tests/Repository/SettingsRepositoryTest.php<br>
                 &lt;path to project&gt;/tests/Repository/UserRepositoryTest.php<br>
                 &lt;path to project&gt;/tests/Validator/MainPageValidatorTest.php<br>
                 &lt;path to project&gt;/tests/bootstrap.php
@@ -631,11 +660,24 @@ class MainPageValidator extends ErrorValidator
             <p>
                 These EEQ Framework core classes are located in the "src/Core/*" directory.
                 You'll need to copy the new ones to the updated project and fix any inconsistencies in other application files.
+                Then open the url below:
             </p>
+
+            <blockquote>https://&lt;domain.com&gt;/install.php</blockquote>
 
             <span id="change-logs"></span>
 
             <h2>5. Change Logs</h2>
+
+            <h3>v1.0.0 - 24 November 2026</h3>
+
+            <p>
+                - Add: Auto installation added<br>
+                - Add: Settings classes added<br>
+                - Update: Core classes changed<br>
+                - Update: Tests classes changed<br>
+                - Fix: Prepare class fixed
+            </p>
 
             <h3>v0.4.0 - 26 November 2025</h3>
 

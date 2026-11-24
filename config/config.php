@@ -17,6 +17,12 @@ const REDIRECTS_FILE = __DIR__ . '/redirects.php';
 const SETTINGS_FILE = __DIR__ . '/settings.php';
 const ERROR_LOG_FILE = __DIR__ . '/../error.log';
 const CORE_FILE = __DIR__ . '/../inc/core/core.php';
+const INSTALL_FILE = __DIR__ . '/../inc/public/install.php';
+const INSTALL_DATA_FILE = __DIR__ . '/../inc/data/install.php';
+const UPDATE_DATA_FILE = __DIR__ . '/../inc/data/update.php';
+const INDEX_FILE = __DIR__ . '/../inc/public/index.php';
+const ERROR_FILE = __DIR__ . '/../inc/public/error.php';
+const INFO_FILE = __DIR__ . '/../inc/public/info.php';
 const AUTOLOAD_FILE = __DIR__ . '/../vendor/autoload.php';
 
 const DEFAULT_DATABASE_CLASS = 'MyPDO';

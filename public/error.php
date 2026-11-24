@@ -1,3 +1,5 @@
 <?php
 
-require dirname(__DIR__) . '/inc/public/error.php';
+require dirname(__DIR__) . '/config/config.php';
+
+require ERROR_FILE;
