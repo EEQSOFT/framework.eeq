@@ -38,7 +38,15 @@ Change the permissions of the "settings.php" file to 666:
 <path to project>/config/settings.php
 ```
 
-### 5. Open this web application in your browser
+### 5. Install the application by running the "install.php" file
+
+Open the url below in your browser:
+
+```
+https://<domain.com>/install.php
+```
+
+### 6. Open this web application in your browser
 
 Open the url below in your browser:
 

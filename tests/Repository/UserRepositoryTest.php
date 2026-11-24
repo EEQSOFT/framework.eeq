@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace App\Tests\Repository;
 
-use App\Core\{Manager, MyPDO};
+use App\Core\{Database, Manager};
 use App\Repository\UserRepository;
 use PHPUnit\Framework\TestCase;
 
 class UserRepositoryTest extends TestCase
 {
-    protected readonly MyPDO $db;
+    protected readonly Database $db;
     protected readonly Manager $rm;
     protected readonly UserRepository $ur;
 
     public function setUp(): void
     {
-        $this->db = new MyPDO();
+        $class = 'App\\Core\\' . DEFAULT_DATABASE_CLASS;
+
+        $this->db = new $class();
         $this->rm = new Manager($this->db);
         $this->ur = $this->rm->getRepository(UserRepository::class);
 

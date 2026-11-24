@@ -5,6 +5,28 @@ CREATE DATABASE IF NOT EXISTS `framework` DEFAULT CHARACTER SET utf8mb4 COLLATE 
 
 USE `framework`;
 
+CREATE TABLE IF NOT EXISTS `settings` (
+    `settings_version` VARCHAR(11) NOT NULL DEFAULT '1.0.0',
+    `settings_installed` TINYINT NOT NULL DEFAULT 1,
+    `settings_registered` TINYINT NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `settings` () VALUES ();
+
+CREATE TABLE IF NOT EXISTS `language` (
+    `language_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `language_prefix` VARCHAR(2) NOT NULL DEFAULT '',
+    `language_name` VARCHAR(30) NOT NULL DEFAULT '',
+    PRIMARY KEY (`language_id`),
+--  KEY `language_id` (`language_id`),
+    KEY `language_prefix` (`language_prefix`),
+    KEY `language_name` (`language_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `language` (`language_id`, `language_prefix`, `language_name`) VALUES
+(1, 'en', 'English'),
+(2, 'pl', 'Polish');
+
 CREATE TABLE IF NOT EXISTS `user` (
     `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `user_admin` TINYINT NOT NULL DEFAULT 0,
@@ -44,17 +66,3 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`user_id`, `user_admin`, `user_active`, `user_login`, `user_login_canonical`, `user_email`, `user_email_canonical`, `user_password`, `user_key`) VALUES
 (1, 0, 1, 'User', 'user', 'user@framework.eeq', 'user@framework.eeq', '', ''),
 (2, 1, 1, 'Admin', 'admin', 'admin@framework.eeq', 'admin@framework.eeq', '', '');
-
-CREATE TABLE IF NOT EXISTS `language` (
-    `language_id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `language_prefix` VARCHAR(2) NOT NULL DEFAULT '',
-    `language_name` VARCHAR(30) NOT NULL DEFAULT '',
-    PRIMARY KEY (`language_id`),
---  KEY `language_id` (`language_id`),
-    KEY `language_prefix` (`language_prefix`),
-    KEY `language_name` (`language_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-INSERT INTO `language` (`language_id`, `language_prefix`, `language_name`) VALUES
-(1, 'en', 'English'),
-(2, 'pl', 'Polish');
