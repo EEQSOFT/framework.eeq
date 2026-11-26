@@ -120,7 +120,7 @@ class MainPageService
 
 ## Setup/Installation
 
-### 1. Set the root directory of the php files to `public`
+### 1. Set the root directory of the php files to `public/`
 
 Set the path for your hosting:
 
@@ -138,7 +138,7 @@ for example: "framework"
 
 ### 3. Change the settings in the `database.php` file
 
-Set as in the `database.php.dist` file (check `config`):
+Set as in the `database.php.dist` file (check `config/`):
 
 ```
 'db_host' => 'localhost'
@@ -186,7 +186,7 @@ cd <path to project>
 docker-compose up -d
 ```
 
-### 3. Set the permissions and access for the "fwe-php-apache" container
+### 3. Set the permissions and access for the fwe-php-apache container
 
 ```
 docker exec -it fwe-php-apache bash
