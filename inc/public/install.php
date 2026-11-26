@@ -24,9 +24,14 @@ setcookie('cookie_login', '', 0, '/', $config->getServerName());
 
 session_destroy();
 
-if (!chmod(SETTINGS_FILE, octdec('666'))) {
+if (
+    !chown(SETTINGS_FILE, 'www-data')
+    || !chgrp(SETTINGS_FILE, 'www-data')
+    || !chmod(SETTINGS_FILE, octdec('644'))
+) {
     echo '<strong>Info!</strong> '
-        . 'Change the permissions of the "config/settings.php" file to 666.';
+        . 'Change the permissions of the "config/settings.php" file to 644'
+        . ' (www-data:www-data).';
 
     exit;
 }
