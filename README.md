@@ -120,7 +120,7 @@ class MainPageService
 
 ## Setup/Installation
 
-### 1. Set the root directory of the php files to "public"
+### 1. Set the root directory of the php files to `public`
 
 Set the path for your hosting:
 
@@ -136,9 +136,9 @@ Use the database name as in your config:
 for example: "framework"
 ```
 
-### 3. Change the settings in the "database.php" file
+### 3. Change the settings in the `database.php` file
 
-Set as in the "database.php.dist" file (check "config"):
+Set as in the `database.php.dist` file (check `config`):
 
 ```
 'db_host' => 'localhost'
@@ -150,13 +150,13 @@ Set as in the "database.php.dist" file (check "config"):
 
 ### 4. If necessary, set these permissions
 
-Change the permissions of the "settings.php" file to 644 (www-data:www-data):
+Change the permissions of the `settings.php` file to 644 (www-data:www-data):
 
 ```
 <path to project>/config/settings.php
 ```
 
-### 5. Install the application by running the "install.php" file
+### 5. Install the application by running the `install.php` file
 
 Open the url below in your browser:
 
@@ -180,7 +180,7 @@ https://<domain.com>
 cd <path to project>
 ```
 
-### 2. Start the application stack defined in "docker-compose.yml"
+### 2. Start the application stack defined in `docker-compose.yml`
 
 ```
 docker-compose up -d
@@ -213,7 +213,7 @@ docker-compose down
 
 ## Composer
 
-### 1. Install the needed dependencies from the "composer.json" file
+### 1. Install the needed dependencies from the `composer.json` file
 
 ```
 docker exec -it fwe-php-apache bash
