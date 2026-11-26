@@ -10,7 +10,7 @@ Inspired by Symfony's clean directory structure and repository pattern, **EEQ Fr
 * **Service-Oriented Architecture (SOA):** Clean separation of business logic.
 * **Symfony-inspired Structure:** Zero learning curve for developers familiar with Symfony (`src/`, `config/`, `templates/`, `tests/`).
 * **Docker & PHPUnit Ready:** Out-of-the-box container setup and testing environment.
-* **Full Documentation:** Check the included `documentation.html` file (or visit [https://www.eeqsoft.com](https://www.eeqsoft.com)) for complete guides.
+* **Full Documentation:** Check the included `documentation.html` file (or visit [EEQSOFT](https://www.eeqsoft.com)) for complete guides.
 
 ## Code Example (SOA in practice)
 
@@ -33,20 +33,22 @@ use App\Validator\MainPageValidator;
 
 class MainPageController extends Controller
 {
-    public function mainPageAction(array \$request): array
+    public function mainPageAction(array $request): array
     {
-        mainPageValidator = new MainPageValidator(this->csrfToken);
+        $mainPageValidator = new MainPageValidator($this->csrfToken);
 
-        \$mainPageService = new MainPageService(
-            \(this->getManager(),\)this->html,
-            \(this->csrfToken,\)mainPageValidator
+        $mainPageService = new MainPageService(
+            $this->getManager(),
+            $this->html,
+            $this->csrfToken,
+            $mainPageValidator
         );
 
-        return \$mainPageService->mainPageAction(
-            (string) (\$request['lang'] ?? ''),
-            (string) (\$request['name'] ?? ''),
-            (bool) (\$request['submit'] ?? false),
-            (string) (\$request['token'] ?? '')
+        return $mainPageService->mainPageAction(
+            (string) ($request['lang'] ?? ''),
+            (string) ($request['name'] ?? ''),
+            (bool) ($request['submit'] ?? false),
+            (string) ($request['token'] ?? '')
         );
     }
 }
@@ -70,30 +72,32 @@ use App\Validator\MainPageValidator;
 class MainPageService
 {
     public function __construct(
-        protected readonly Manager \$rm,
-        protected readonly Html \$html,
-        protected readonly CsrfToken \$csrfToken,
-        protected readonly MainPageValidator \$mainPageValidator
+        protected readonly Manager $rm,
+        protected readonly Html $html,
+        protected readonly CsrfToken $csrfToken,
+        protected readonly MainPageValidator $mainPageValidator
     ) {}
 
     public function mainPageAction(
-        string \$lang,
-        string \$name,
-        bool \$submit,
-        string \$token
+        string $lang,
+        string $name,
+        bool $submit,
+        string $token
     ): array {
-        ur = this->rm->getRepository(UserRepository::class);
+        $ur = $this->rm->getRepository(UserRepository::class);
 
-        if (\(submit) {\)this->mainPageValidator->validate([name, token]);
+        if ($submit) {
+            $this->mainPageValidator->validate([$name, $token]);
 
-            if (\(this->mainPageValidator->isValid()) {\)userData = ur->getCookieLoginUserData(name, '');
+            if ($this->mainPageValidator->isValid()) {
+                $userData = $ur->getCookieLoginUserData($name, '');
 
                 return [
                     'content' => 'main_page/name_info.php',
                     'active_menu' => 'main_page',
                     'title' => PAGE_INFO_TITLE,
-                    'language' => LANGUAGE_NAME[LANGUAGE_ID[\$lang]],
-                    'name' => \(userData['user_login'] ?? \)name
+                    'language' => LANGUAGE_NAME[LANGUAGE_ID[$lang]],
+                    'name' => $userData['user_login'] ?? $name
                 ];
             }
         }
@@ -104,10 +108,11 @@ class MainPageService
             'title' => PAGE_MAIN_PAGE_TITLE,
             'desc' => WEBSITE_DESC,
             'keywords' => WEBSITE_KEYWORDS,
-            'error' => \(this->html->prepareError(\)this->mainPageValidator->getError()
+            'error' => $this->html->prepareError(
+                $this->mainPageValidator->getError()
             ),
-            'name' => \$name,
-            'token' => \$this->csrfToken->generateToken()
+            'name' => $name,
+            'token' => $this->csrfToken->generateToken()
         ];
     }
 }
