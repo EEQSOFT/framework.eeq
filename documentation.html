@@ -126,18 +126,13 @@
                 'db_database' => 'framework'
             </blockquote>
 
-            <p>
-                If necessary, set these permissions.
-                Change the permissions of the "settings.php" file to 666:
-            </p>
+            <p>If necessary, set the permissions of the "settings.php" file to 644 (www‑data:www‑data):</p>
 
             <blockquote>&lt;path to project&gt;/config/settings.php</blockquote>
 
             <h3>Application Installation</h3>
 
-            <p>
-                If you want to use a database, use the SQL commands from the "framework.sql" file for your database:
-            </p>
+            <p>If you want to use a database, use the SQL commands from the "framework.sql" file for your database:</p>
 
             <blockquote>&lt;path to project&gt;/data/framework.sql</blockquote>
 
@@ -624,7 +619,7 @@ class MainPageValidator extends ErrorValidator
                 docker exec -it fwe-php-apache bash<br>
                 cd /var/www<br>
                 ls -l<br>
-                chmod 777 /var/www/html<br>
+                chmod 755 /var/www/html<br>
                 chown -R www-data:www-data /var/www/html<br>
                 ls -l<br>
                 exit
