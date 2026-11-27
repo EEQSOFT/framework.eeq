@@ -31,7 +31,7 @@ if (
 ) {
     echo '<strong>Info!</strong> '
         . 'Change the permissions of the "config/settings.php" file to 644'
-        . ' (www-data:www-data).';
+        . ' (www‑data:www‑data).';
 
     exit;
 }

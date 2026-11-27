@@ -150,7 +150,7 @@ Set as in the `database.php.dist` file (check `config/`):
 
 ### 4. If necessary, set these permissions
 
-Change the permissions of the `settings.php` file to 644 (www-data:www-data):
+Change the permissions of the `settings.php` file to 644 (www‑data:www‑data):
 
 ```
 <path to project>/config/settings.php
